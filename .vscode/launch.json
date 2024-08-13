@@ -1,0 +1,58 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "development",
+            "request": "launch",
+            "type": "dart",
+            "args": [
+                "--web-renderer",
+                "canvaskit",
+                "--web-browser-flag",
+                "--disable-web-security"
+            ],
+            "toolArgs": [
+                "--dart-define",
+                "ENV=development",
+                "--dart-define",
+                "API_BASE_URL=api.themoviedb.org",
+                "--dart-define",
+                "API_KEY=4a7018376d6a5239159d0bb9b44a54ad",
+                "--dart-define",
+                "BEARER_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YTcwMTgzNzZkNmE1MjM5MTU5ZDBiYjliNDRhNTRhZCIsIm5iZiI6MTcyMzU3OTExNy42NjUxNDQsInN1YiI6IjY2OTFiOGMzYjcxYzRmYmJlYjAyMzgxZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QSedvf21kxZ5RUMqkgpMft7LZhSrQPBqepoqN5VHx6s"
+            ]
+        },
+        {
+            "name": "staging",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "profile",
+            "toolArgs": [
+                "--dart-define",
+                "ENV=staging",
+                "--dart-define",
+                "API_BASE_URL=api.themoviedb.org",
+                "--dart-define",
+                "API_KEY=4a7018376d6a5239159d0bb9b44a54ad",
+                "--dart-define",
+                "BEARER_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YTcwMTgzNzZkNmE1MjM5MTU5ZDBiYjliNDRhNTRhZCIsIm5iZiI6MTcyMzU3OTExNy42NjUxNDQsInN1YiI6IjY2OTFiOGMzYjcxYzRmYmJlYjAyMzgxZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QSedvf21kxZ5RUMqkgpMft7LZhSrQPBqepoqN5VHx6s"
+            ]
+        },
+        {
+            "name": "production",
+            "request": "launch",
+            "type": "dart",
+            "flutterMode": "release",
+            "toolArgs": [
+                "--dart-define",
+                "ENV=production",
+                "--dart-define",
+                "API_BASE_URL=api.themoviedb.org",
+                "--dart-define",
+                "API_KEY=4a7018376d6a5239159d0bb9b44a54ad",
+                "--dart-define",
+                "BEARER_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YTcwMTgzNzZkNmE1MjM5MTU5ZDBiYjliNDRhNTRhZCIsIm5iZiI6MTcyMzU3OTExNy42NjUxNDQsInN1YiI6IjY2OTFiOGMzYjcxYzRmYmJlYjAyMzgxZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QSedvf21kxZ5RUMqkgpMft7LZhSrQPBqepoqN5VHx6s"
+            ]
+        }
+    ]
+}
