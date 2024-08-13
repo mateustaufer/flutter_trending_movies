@@ -6,86 +6,122 @@ import 'network_response.dart';
 class Api {
   static final api = Api();
 
-  NetworkResponse getResponse(http.Response response) {
+  NetworkResponse _getResponse(http.Response response) {
     return NetworkResponse(
       body: response.body,
       statusCode: response.statusCode,
     );
   }
 
-  static Future<NetworkResponse> get({required String path}) async {
-    try {
-      final response = await http.get(Uri.https(Constants.baseUrl, path));
+  Map<String, String> _getHeaders({required bool isAuthenticated}) {
+    if (!isAuthenticated) {
+      return {'Content-Type': 'application/json;charset=utf-8'};
+    }
 
-      return api.getResponse(response);
+    return {
+      'Content-Type': 'application/json;charset=utf-8',
+      'Authorization': 'Bearer ${Constants.bearerToken}',
+    };
+  }
+
+  Future<NetworkResponse> get({
+    required String path,
+    Map<String, dynamic>? queryParameters,
+    bool isAuthenticated = true,
+  }) async {
+    try {
+      final response = await http.get(
+        Uri.https(Constants.baseUrl, path, queryParameters),
+        headers: _getHeaders(isAuthenticated: isAuthenticated),
+      );
+
+      return _getResponse(response);
     } catch (e) {
       rethrow;
     }
   }
 
-  static Future<NetworkResponse> post({
+  Future<NetworkResponse> post({
     required String path,
     required Map<String, dynamic> body,
+    bool isAuthenticated = true,
   }) async {
     try {
       final response = await http.post(
         Uri.https(Constants.baseUrl, path),
         body: body,
+        headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
 
-      return api.getResponse(response);
+      return _getResponse(response);
     } catch (e) {
       rethrow;
     }
   }
 
-  static Future<NetworkResponse> put({
+  Future<NetworkResponse> put({
     required String path,
     required Map<String, dynamic> body,
+    bool isAuthenticated = true,
   }) async {
     try {
       final response = await http.put(
         Uri.https(Constants.baseUrl, path),
         body: body,
+        headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
 
-      return api.getResponse(response);
+      return _getResponse(response);
     } catch (e) {
       rethrow;
     }
   }
 
-  static Future<NetworkResponse> delete({required String path}) async {
+  Future<NetworkResponse> delete({
+    required String path,
+    bool isAuthenticated = true,
+  }) async {
     try {
-      final response = await http.delete(Uri.https(Constants.baseUrl, path));
+      final response = await http.delete(
+        Uri.https(Constants.baseUrl, path),
+        headers: _getHeaders(isAuthenticated: isAuthenticated),
+      );
 
-      return api.getResponse(response);
+      return _getResponse(response);
     } catch (e) {
       rethrow;
     }
   }
 
-  static Future<NetworkResponse> patch({
+  Future<NetworkResponse> patch({
     required String path,
     required Map<String, dynamic> body,
+    bool isAuthenticated = true,
   }) async {
     try {
       final response = await http.patch(
         Uri.https(Constants.baseUrl, path),
         body: body,
+        headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
 
-      return api.getResponse(response);
+      return _getResponse(response);
     } catch (e) {
       rethrow;
     }
   }
 
-  static Future<NetworkResponse> head({required String path}) async {
+  Future<NetworkResponse> head({
+    required String path,
+    bool isAuthenticated = true,
+  }) async {
     try {
-      final response = await http.head(Uri.https(Constants.baseUrl, path));
+      final response = await http.head(
+        Uri.https(Constants.baseUrl, path),
+        headers: _getHeaders(isAuthenticated: isAuthenticated),
+      );
 
-      return api.getResponse(response);
+      return _getResponse(response);
     } catch (e) {
       rethrow;
     }
