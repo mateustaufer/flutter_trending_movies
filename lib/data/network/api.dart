@@ -4,7 +4,7 @@ import 'constants.dart';
 import 'network_response.dart';
 
 class Api {
-  static final api = Api();
+  static final method = Api();
 
   NetworkResponse _getResponse(http.Response response) {
     return NetworkResponse(
