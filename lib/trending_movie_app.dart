@@ -1,20 +1,20 @@
 import 'package:flutter/material.dart';
 
-import 'home_page_view.dart';
+import 'routes.dart';
 
 class TrendingMovieApp extends StatelessWidget {
   const TrendingMovieApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Trending Movies',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePageView(),
+      routerConfig: Routes.routerConfig,
     );
   }
 }
