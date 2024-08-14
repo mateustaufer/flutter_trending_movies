@@ -6,7 +6,7 @@ import 'network_response.dart';
 class Api {
   static final method = Api();
 
-  NetworkResponse _getResponse(http.Response response) {
+  NetworkResponse _getNetworkResponse(http.Response response) {
     return NetworkResponse(
       body: response.body,
       statusCode: response.statusCode,
@@ -39,7 +39,7 @@ class Api {
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
 
-      return _getResponse(response);
+      return _getNetworkResponse(response);
     } catch (e) {
       rethrow;
     }
@@ -57,7 +57,7 @@ class Api {
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
 
-      return _getResponse(response);
+      return _getNetworkResponse(response);
     } catch (e) {
       rethrow;
     }
@@ -75,7 +75,7 @@ class Api {
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
 
-      return _getResponse(response);
+      return _getNetworkResponse(response);
     } catch (e) {
       rethrow;
     }
@@ -91,7 +91,7 @@ class Api {
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
 
-      return _getResponse(response);
+      return _getNetworkResponse(response);
     } catch (e) {
       rethrow;
     }
@@ -109,7 +109,7 @@ class Api {
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
 
-      return _getResponse(response);
+      return _getNetworkResponse(response);
     } catch (e) {
       rethrow;
     }
@@ -125,7 +125,7 @@ class Api {
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
 
-      return _getResponse(response);
+      return _getNetworkResponse(response);
     } catch (e) {
       rethrow;
     }
