@@ -1,16 +1,23 @@
 # flutter_trending_movies
 
-A new Flutter project.
+A simple app that shows a trending movies list from TMDB API.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+[First of all, create a Bearer Token at themoviedb api site](https://www.themoviedb.org/settings/api)
+You will need to signup or signin for this.
 
-A few resources to get you started if this is your first Flutter project:
+Create a .env file with this structure:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+{
+    "ENV": "development",
+    "API_BASE_URL": "api.themoviedb.org",
+    "API_VERSION": "3",
+    "API_KEY": "YOUR_API_KEY",
+    "BEARER_TOKEN": "YOUR_BEARER_TOKEN"
+}
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+At the last, but not the least, just run the project:
+    On VSCode, use the Debug Button and choose one profile;
+    Or run this command in you terminal:
+        flutter run --dart-define-from-file .env
