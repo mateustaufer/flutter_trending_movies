@@ -15,14 +15,29 @@ class HomePageView extends StatefulWidget {
 class _HomePageViewState extends State<HomePageView> {
   final moviesRepository = MovieRepository(MovieProvider());
   MoviesListModel moviesList = MoviesListModel();
+  bool isLoading = false;
 
   @override
   void initState() {
     super.initState();
 
+    isLoading = true;
     moviesRepository.fetchMoviesList(listId: 1).then((value) {
+      value.fold(
+        (l) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(l.statusMessage ?? '')),
+          );
+        },
+        (r) {
+          setState(() {
+            moviesList = r;
+          });
+        },
+      );
+    }).whenComplete(() {
       setState(() {
-        moviesList = value;
+        isLoading = false;
       });
     });
   }
@@ -31,18 +46,23 @@ class _HomePageViewState extends State<HomePageView> {
   Widget build(BuildContext context) {
     return BasePageWidget(
       appBar: AppBar(title: const Text('Movies List')),
-      body: ListView.separated(
-        itemCount: moviesList.movies?.length ?? 0,
-        itemBuilder: (_, index) => ListTile(
-            title: Text(moviesList.movies?[index].title ?? 'deu ruim')),
-        separatorBuilder: (_, index) {
-          if (index < (moviesList.movies?.length ?? 0)) {
-            return const SizedBox(height: 8);
-          }
+      body: isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : moviesList.movies?.isEmpty ?? true
+              ? const Center(child: Text('A lista de filmes está vazia!'))
+              : ListView.separated(
+                  itemCount: moviesList.movies?.length ?? 0,
+                  itemBuilder: (_, index) => ListTile(
+                    title: Text(moviesList.movies?[index].title ?? ''),
+                  ),
+                  separatorBuilder: (_, index) {
+                    if (index < (moviesList.movies?.length ?? 0)) {
+                      return const SizedBox(height: 8);
+                    }
 
-          return const SizedBox.shrink();
-        },
-      ),
+                    return const SizedBox.shrink();
+                  },
+                ),
     );
   }
 }
