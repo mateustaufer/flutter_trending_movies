@@ -22,11 +22,39 @@ class _HomePageViewState extends State<HomePageView> {
     super.initState();
 
     isLoading = true;
-    moviesRepository.fetchMoviesList(listId: 1).then((response) {
+
+    // moviesRepository.fetchMoviesList(listId: 1).then((response) {
+    //   response.fold(
+    //     (l) {
+    //       ScaffoldMessenger.of(context).showSnackBar(
+    //         SnackBar(
+    //           content: Text(l.statusMessage ?? ''),
+    //           showCloseIcon: true,
+    //         ),
+    //       );
+    //     },
+    //     (r) {
+    //       setState(() {
+    //         moviesList = r;
+    //       });
+    //     },
+    //   );
+    // }).whenComplete(() {
+    //   setState(() {
+    //     isLoading = false;
+    //   });
+    // });
+
+    moviesRepository
+        .fetchTrendingMoviesList(timeWindow: 'day')
+        .then((response) {
       response.fold(
         (l) {
           ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text(l.statusMessage ?? '')),
+            SnackBar(
+              content: Text(l.statusMessage ?? ''),
+              showCloseIcon: true,
+            ),
           );
         },
         (r) {
@@ -45,7 +73,7 @@ class _HomePageViewState extends State<HomePageView> {
   @override
   Widget build(BuildContext context) {
     return BasePageWidget(
-      appBar: AppBar(title: const Text('Movies List')),
+      appBar: AppBar(title: const Text('Trending Movies')),
       body: isLoading
           ? const Center(child: CircularProgressIndicator())
           : moviesList.movies?.isEmpty ?? true

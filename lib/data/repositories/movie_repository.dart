@@ -43,4 +43,36 @@ class MovieRepository {
       );
     }
   }
+
+  Future<Either<ResponseError, MoviesListModel>> fetchTrendingMoviesList({
+    required String timeWindow,
+    String language = 'pt-BR',
+  }) async {
+    try {
+      final response = await movieProvider.fetchTrendingMoviesList(
+        timeWindow: timeWindow,
+        language: language,
+      );
+
+      if (response.statusCode != 200) {
+        final responseError = ResponseError.fromRawJson(response.body);
+        return left(responseError);
+      }
+
+      return right(MoviesListModel.fromRawJson(response.body));
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('MoviesRepository fetchTrendingMoviesList error ==> $e');
+        print('MoviesRepository fetchTrendingMoviesList stackTrace ==> $s');
+      }
+
+      return left(
+        ResponseError(
+          success: false,
+          statusCode: 500,
+          statusMessage: 'Erro ao buscar a lista de filmes mais assistidos.',
+        ),
+      );
+    }
+  }
 }

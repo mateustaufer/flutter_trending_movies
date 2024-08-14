@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import '../controllers/counter_page_controller.dart';
+
 class CounterPageView extends StatefulWidget {
   const CounterPageView({super.key, required this.title});
 
@@ -10,11 +12,14 @@ class CounterPageView extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<CounterPageView> {
-  int _counter = 0;
+  final controller = CounterPageController();
 
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
+  @override
+  void initState() {
+    super.initState();
+
+    controller.addListener(() {
+      setState(() {});
     });
   }
 
@@ -33,14 +38,14 @@ class _MyHomePageState extends State<CounterPageView> {
               'You have pushed the button this many times:',
             ),
             Text(
-              '$_counter',
+              '${controller.counter}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: controller.incrementCounter,
         tooltip: 'Increment',
         child: const Icon(Icons.add),
       ),

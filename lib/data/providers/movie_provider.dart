@@ -21,4 +21,20 @@ class MovieProvider {
       rethrow;
     }
   }
+
+  Future<NetworkResponse> fetchTrendingMoviesList({
+    required String timeWindow,
+    String language = 'pt-BR',
+  }) async {
+    try {
+      final response = await Api.method.get(
+        path: '/trending/movie/$timeWindow',
+        queryParameters: {'language': language},
+      );
+
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
