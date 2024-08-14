@@ -1,5 +1,5 @@
 name: flutter_trending_movies
-description: "A simple app that shows a trending movies list"
+description: "A simple app that shows a trending movies list."
 
 publish_to: "none"
 
@@ -13,6 +13,8 @@ dependencies:
     sdk: flutter
 
   cupertino_icons: ^1.0.8
+  
+  http: ^1.2.2
 
 dev_dependencies:
   flutter_test:

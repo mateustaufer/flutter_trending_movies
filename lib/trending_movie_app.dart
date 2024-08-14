@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'counter_page_view.dart';
+import 'home_page_view.dart';
 
 class TrendingMovieApp extends StatelessWidget {
   const TrendingMovieApp({super.key});
@@ -14,7 +14,7 @@ class TrendingMovieApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const CounterPageView(title: 'Counter'),
+      home: const HomePageView(),
     );
   }
 }
