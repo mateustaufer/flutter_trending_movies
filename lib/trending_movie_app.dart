@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'home_page_view.dart';
+import 'views/home_page_view.dart';
 
 class TrendingMovieApp extends StatelessWidget {
   const TrendingMovieApp({super.key});

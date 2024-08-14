@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'data/models/movies_list_model.dart';
-import 'data/providers/movie_provider.dart';
-import 'data/repositories/movie_repository.dart';
-import 'widgets/base_page_widget.dart';
+import '../data/models/movies_list_model.dart';
+import '../data/providers/movie_provider.dart';
+import '../data/repositories/movie_repository.dart';
+import '../widgets/base_page_widget.dart';
 
 class HomePageView extends StatefulWidget {
   const HomePageView({super.key});
