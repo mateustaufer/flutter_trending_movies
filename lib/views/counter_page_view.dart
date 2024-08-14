@@ -18,7 +18,7 @@ class _MyHomePageState extends State<CounterPageView> {
   void initState() {
     super.initState();
 
-    controller.addListener(() {
+    controller.counter.addListener(() {
       setState(() {});
     });
   }
@@ -33,12 +33,12 @@ class _MyHomePageState extends State<CounterPageView> {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
+          children: [
             const Text(
               'You have pushed the button this many times:',
             ),
             Text(
-              '${controller.counter}',
+              '${controller.counter.value}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
           ],

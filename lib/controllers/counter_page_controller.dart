@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
-class CounterPageController extends ChangeNotifier {
-  int counter = 0;
+class CounterPageController {
+  var counter = ValueNotifier(0);
 
   void incrementCounter() {
-    counter++;
-    notifyListeners();
+    counter.value++;
   }
 }
