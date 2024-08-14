@@ -22,8 +22,8 @@ class _HomePageViewState extends State<HomePageView> {
     super.initState();
 
     isLoading = true;
-    moviesRepository.fetchMoviesList(listId: 1).then((value) {
-      value.fold(
+    moviesRepository.fetchMoviesList(listId: 1).then((response) {
+      response.fold(
         (l) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(content: Text(l.statusMessage ?? '')),
