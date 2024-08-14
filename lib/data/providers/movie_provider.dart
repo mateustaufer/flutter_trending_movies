@@ -9,10 +9,10 @@ class MovieProvider {
   }) async {
     try {
       final response = await Api.method.get(
-        path: '/list/$listId',
+        path: 'list/$listId',
         queryParameters: {
           'language': language,
-          'page': page,
+          'page': page.toString(),
         },
       );
 

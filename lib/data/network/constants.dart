@@ -9,6 +9,11 @@ class Constants {
     defaultValue: 'BASE_URL',
   );
 
+  static const apiVersion = String.fromEnvironment(
+    'API_VERSION',
+    defaultValue: '4',
+  );
+
   static const apiKey = String.fromEnvironment(
     'API_KEY',
     defaultValue: 'YOUR_API_KEY',

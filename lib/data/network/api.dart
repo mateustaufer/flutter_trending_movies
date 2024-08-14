@@ -31,7 +31,11 @@ class Api {
   }) async {
     try {
       final response = await http.get(
-        Uri.https(Constants.baseUrl, path, queryParameters),
+        Uri.https(
+          Constants.baseUrl,
+          '${Constants.apiVersion}/$path',
+          queryParameters,
+        ),
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
 
@@ -48,7 +52,7 @@ class Api {
   }) async {
     try {
       final response = await http.post(
-        Uri.https(Constants.baseUrl, path),
+        Uri.https(Constants.baseUrl, '${Constants.apiVersion}/$path'),
         body: body,
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
@@ -66,7 +70,7 @@ class Api {
   }) async {
     try {
       final response = await http.put(
-        Uri.https(Constants.baseUrl, path),
+        Uri.https(Constants.baseUrl, '${Constants.apiVersion}/$path'),
         body: body,
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
@@ -83,7 +87,7 @@ class Api {
   }) async {
     try {
       final response = await http.delete(
-        Uri.https(Constants.baseUrl, path),
+        Uri.https(Constants.baseUrl, '${Constants.apiVersion}/$path'),
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
 
@@ -100,7 +104,7 @@ class Api {
   }) async {
     try {
       final response = await http.patch(
-        Uri.https(Constants.baseUrl, path),
+        Uri.https(Constants.baseUrl, '${Constants.apiVersion}/$path'),
         body: body,
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
@@ -117,7 +121,7 @@ class Api {
   }) async {
     try {
       final response = await http.head(
-        Uri.https(Constants.baseUrl, path),
+        Uri.https(Constants.baseUrl, '${Constants.apiVersion}/$path'),
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
 
