@@ -16,11 +16,9 @@
                 "ENV=development",
                 "--dart-define",
                 "API_BASE_URL=api.themoviedb.org",
-                "--dart-define",
-                "API_KEY=4a7018376d6a5239159d0bb9b44a54ad",
-                "--dart-define",
-                "BEARER_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YTcwMTgzNzZkNmE1MjM5MTU5ZDBiYjliNDRhNTRhZCIsIm5iZiI6MTcyMzU3OTExNy42NjUxNDQsInN1YiI6IjY2OTFiOGMzYjcxYzRmYmJlYjAyMzgxZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QSedvf21kxZ5RUMqkgpMft7LZhSrQPBqepoqN5VHx6s"
-            ]
+                "--dart-define-from-file",
+                ".env-development"
+            ],
         },
         {
             "name": "staging",
@@ -32,10 +30,8 @@
                 "ENV=staging",
                 "--dart-define",
                 "API_BASE_URL=api.themoviedb.org",
-                "--dart-define",
-                "API_KEY=4a7018376d6a5239159d0bb9b44a54ad",
-                "--dart-define",
-                "BEARER_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YTcwMTgzNzZkNmE1MjM5MTU5ZDBiYjliNDRhNTRhZCIsIm5iZiI6MTcyMzU3OTExNy42NjUxNDQsInN1YiI6IjY2OTFiOGMzYjcxYzRmYmJlYjAyMzgxZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QSedvf21kxZ5RUMqkgpMft7LZhSrQPBqepoqN5VHx6s"
+                "--dart-define-from-file",
+                ".env-staging"
             ]
         },
         {
@@ -48,10 +44,8 @@
                 "ENV=production",
                 "--dart-define",
                 "API_BASE_URL=api.themoviedb.org",
-                "--dart-define",
-                "API_KEY=4a7018376d6a5239159d0bb9b44a54ad",
-                "--dart-define",
-                "BEARER_TOKEN=eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0YTcwMTgzNzZkNmE1MjM5MTU5ZDBiYjliNDRhNTRhZCIsIm5iZiI6MTcyMzU3OTExNy42NjUxNDQsInN1YiI6IjY2OTFiOGMzYjcxYzRmYmJlYjAyMzgxZiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.QSedvf21kxZ5RUMqkgpMft7LZhSrQPBqepoqN5VHx6s"
+                "--dart-define-from-file",
+                ".env"
             ]
         }
     ]
