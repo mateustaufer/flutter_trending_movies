@@ -15,15 +15,6 @@ class _MyHomePageState extends State<CounterPageView> {
   final controller = CounterPageController();
 
   @override
-  void initState() {
-    super.initState();
-
-    controller.counter.addListener(() {
-      setState(() {});
-    });
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
@@ -37,9 +28,12 @@ class _MyHomePageState extends State<CounterPageView> {
             const Text(
               'You have pushed the button this many times:',
             ),
-            Text(
-              '${controller.counter.value}',
-              style: Theme.of(context).textTheme.headlineMedium,
+            ValueListenableBuilder<int>(
+              valueListenable: controller.counter,
+              builder: (_, value, __) => Text(
+                '$value',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
             ),
           ],
         ),
