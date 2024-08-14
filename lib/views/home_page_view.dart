@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../controllers/home_page_controller.dart';
+import '../data/models/movie_model.dart';
 import '../widgets/base_page_widget.dart';
 
 class HomePageView extends StatefulWidget {
@@ -29,22 +30,28 @@ class _HomePageViewState extends State<HomePageView> {
         builder: (context, value, child) {
           return value
               ? const Center(child: CircularProgressIndicator())
-              : controller.movies.value.isEmpty
-                  ? const Center(child: Text('A lista de filmes está vazia!'))
-                  : ListView.separated(
-                      itemCount: controller.movies.value.length,
-                      itemBuilder: (_, index) => ListTile(
-                        title: Text(controller.movies.value[index].title ?? ''),
-                      ),
-                      separatorBuilder: (_, index) {
-                        if (index < (controller.movies.value.length)) {
-                          return const SizedBox(height: 8);
-                        }
-
-                        return const SizedBox.shrink();
-                      },
-                    );
+              : child ?? const SizedBox.shrink();
         },
+        child: ValueListenableBuilder<List<MovieModel>>(
+          valueListenable: controller.movies,
+          builder: (context, value, child) {
+            return value.isEmpty
+                ? const Center(child: Text('A lista de filmes está vazia!'))
+                : ListView.separated(
+                    itemCount: value.length,
+                    itemBuilder: (_, index) => ListTile(
+                      title: Text(value[index].title ?? ''),
+                    ),
+                    separatorBuilder: (_, index) {
+                      if (index < (value.length)) {
+                        return const SizedBox(height: 8);
+                      }
+
+                      return const SizedBox.shrink();
+                    },
+                  );
+          },
+        ),
       ),
     );
   }
