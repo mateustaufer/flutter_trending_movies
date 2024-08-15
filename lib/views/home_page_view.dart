@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 import '../controllers/home_page_controller.dart';
-import '../data/models/movie_model.dart';
+import '../data/providers/movie_provider.dart';
+import '../data/repositories/movie_repository.dart';
+import '../data/states/movie_state.dart';
 import '../widgets/base_page_widget.dart';
 
 class HomePageView extends StatefulWidget {
@@ -12,46 +14,45 @@ class HomePageView extends StatefulWidget {
 }
 
 class _HomePageViewState extends State<HomePageView> {
-  final controller = HomePageController();
-
-  @override
-  void initState() {
-    super.initState();
-
-    controller.fetchTrendingMovies(context);
-  }
+  final controller = HomePageController(MovieRepository(MovieProvider()));
 
   @override
   Widget build(BuildContext context) {
     return BasePageWidget(
       appBar: AppBar(title: const Text('Trending Movies')),
-      body: ValueListenableBuilder<bool>(
-        valueListenable: controller.isLoading,
-        builder: (context, value, child) {
-          return value
-              ? const Center(child: CircularProgressIndicator())
-              : child ?? const SizedBox.shrink();
-        },
-        child: ValueListenableBuilder<List<MovieModel>>(
-          valueListenable: controller.movies,
-          builder: (context, value, child) {
-            return value.isEmpty
-                ? const Center(child: Text('A lista de filmes está vazia!'))
-                : ListView.separated(
-                    itemCount: value.length,
-                    itemBuilder: (_, index) => ListTile(
-                      title: Text(value[index].title ?? ''),
-                    ),
-                    separatorBuilder: (_, index) {
-                      if (index < (value.length)) {
-                        return const SizedBox(height: 8);
-                      }
+      body: ValueListenableBuilder(
+        valueListenable: controller.movieStore,
+        builder: (context, state, child) {
+          if (state is MovieLoadingState) {
+            return const Center(child: CircularProgressIndicator());
+          }
 
-                      return const SizedBox.shrink();
-                    },
-                  );
-          },
-        ),
+          if (state is MovieErrorState) {
+            WidgetsBinding.instance.addPostFrameCallback((_) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(content: Text(state.message), showCloseIcon: true),
+              );
+            });
+          }
+
+          if (state is MovieSuccessState) {
+            return ListView.separated(
+              itemCount: state.movies.length,
+              itemBuilder: (_, index) => ListTile(
+                title: Text(state.movies[index].title ?? ''),
+              ),
+              separatorBuilder: (_, index) {
+                if (index < (state.movies.length)) {
+                  return const SizedBox(height: 8);
+                }
+
+                return const SizedBox.shrink();
+              },
+            );
+          }
+
+          return const Center(child: Text('A lista de filmes está vazia!'));
+        },
       ),
     );
   }

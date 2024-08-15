@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_trending_movies/trending_movie_app.dart';
+import 'package:flutter_trending_movies/views/counter_page_view.dart';
 
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(const TrendingMovieApp());
+    await tester.pumpWidget(
+      const MaterialApp(home: CounterPageView(title: 'Counter')),
+    );
 
     expect(find.text('0'), findsOneWidget);
     expect(find.text('1'), findsNothing);
