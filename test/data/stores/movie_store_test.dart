@@ -13,7 +13,7 @@ void main() {
   final store = MovieStore(repository);
 
   test(
-    'Testing Movie State Management',
+    'Movie State Success',
     () async {
       when(
         () {
@@ -27,7 +27,22 @@ void main() {
 
       await store.fetchTrendingMoviesList();
 
-      expect(store.value, isA<MovieSuccesState>());
+      expect(store.value, isA<MovieSuccessState>());
+    },
+  );
+
+  test(
+    'Movie State Error',
+    () async {
+      when(
+        () => provider.fetchTrendingMoviesList(timeWindow: 'day'),
+      ).thenThrow(
+        (_) async => Exception('Error'),
+      );
+
+      await store.fetchTrendingMoviesList();
+
+      expect(store.value, isA<MovieErrorState>());
     },
   );
 }

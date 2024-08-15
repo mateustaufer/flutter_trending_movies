@@ -19,7 +19,7 @@ class MovieStore extends ValueNotifier<MovieState> {
         value = MovieErrorState(message: l.statusMessage ?? '');
       },
       (r) {
-        value = MovieSuccesState(movies: r.movies ?? []);
+        value = MovieSuccessState(movies: r.movies ?? []);
       },
     );
   }
