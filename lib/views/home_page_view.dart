@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import '../controllers/home_page_controller.dart';
-import '../data/providers/movie_provider.dart';
-import '../data/repositories/movie_repository.dart';
 import '../data/states/movie_state.dart';
 import '../widgets/base_page_widget.dart';
 
@@ -14,7 +13,7 @@ class HomePageView extends StatefulWidget {
 }
 
 class _HomePageViewState extends State<HomePageView> {
-  final controller = HomePageController(MovieRepository(MovieProvider()));
+  HomePageController controller = GetIt.I.get<HomePageController>();
 
   @override
   Widget build(BuildContext context) {
