@@ -19,7 +19,16 @@ class _HomePageViewState extends State<HomePageView> {
   @override
   Widget build(BuildContext context) {
     return BasePageWidget(
-      appBar: AppBar(title: const Text('Trending Movies')),
+      backgroundColor: Colors.grey.shade100,
+      appBar: AppBar(
+        backgroundColor: Colors.grey.shade200,
+        elevation: 4,
+        shadowColor: Colors.grey.shade400,
+        title: const Text(
+          'Trending Movies',
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
       body: ValueListenableBuilder(
         valueListenable: controller.movieStore,
         builder: (context, state, child) {
