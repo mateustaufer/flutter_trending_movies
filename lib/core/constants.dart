@@ -23,4 +23,6 @@ class Constants {
     'BEARER_TOKEN',
     defaultValue: 'YOUR_BEARER_TOKEN',
   );
+
+  static const imageBaseUrlOriginalSize = 'https://image.tmdb.org/t/p/original';
 }

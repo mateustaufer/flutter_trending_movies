@@ -1,6 +1,6 @@
 import 'package:http/http.dart' as http;
 
-import 'constants.dart';
+import '../../core/constants.dart';
 import 'network_response.dart';
 
 class Api {

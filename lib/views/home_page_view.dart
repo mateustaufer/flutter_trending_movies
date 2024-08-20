@@ -4,6 +4,7 @@ import 'package:get_it/get_it.dart';
 import '../controllers/home_page_controller.dart';
 import '../data/states/movie_state.dart';
 import '../widgets/base_page_widget.dart';
+import 'components/movies_list.dart';
 
 class HomePageView extends StatefulWidget {
   const HomePageView({super.key});
@@ -18,7 +19,16 @@ class _HomePageViewState extends State<HomePageView> {
   @override
   Widget build(BuildContext context) {
     return BasePageWidget(
-      appBar: AppBar(title: const Text('Trending Movies')),
+      backgroundColor: Colors.grey.shade100,
+      appBar: AppBar(
+        backgroundColor: Colors.grey.shade200,
+        elevation: 4,
+        shadowColor: Colors.grey.shade400,
+        title: const Text(
+          'Trending Movies',
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
       body: ValueListenableBuilder(
         valueListenable: controller.movieStore,
         builder: (context, state, child) {
@@ -35,19 +45,7 @@ class _HomePageViewState extends State<HomePageView> {
           }
 
           if (state is MovieSuccessState) {
-            return ListView.separated(
-              itemCount: state.movies.length,
-              itemBuilder: (_, index) => ListTile(
-                title: Text(state.movies[index].title ?? ''),
-              ),
-              separatorBuilder: (_, index) {
-                if (index < (state.movies.length)) {
-                  return const SizedBox(height: 8);
-                }
-
-                return const SizedBox.shrink();
-              },
-            );
+            return MoviesList(movies: state.movies);
           }
 
           return const Center(child: Text('A lista de filmes está vazia!'));
