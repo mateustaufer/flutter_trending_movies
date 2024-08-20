@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/models/movie_model.dart';
+import 'movie_tile.dart';
 
 class MoviesList extends StatelessWidget {
   final List<MovieModel> movies;
@@ -11,9 +12,7 @@ class MoviesList extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       itemCount: movies.length,
-      itemBuilder: (_, index) => ListTile(
-        title: Text(movies[index].title ?? ''),
-      ),
+      itemBuilder: (_, index) => MovieTile(movie: movies[index]),
       separatorBuilder: (_, index) {
         if (index < (movies.length)) {
           return const SizedBox(height: 8);

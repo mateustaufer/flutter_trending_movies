@@ -8,7 +8,7 @@ class MovieProvider {
   }) async {
     try {
       final response = await Api().get(
-        path: '/trending/movie/$timeWindow',
+        path: 'trending/movie/$timeWindow',
         queryParameters: {'language': language},
       );
 
