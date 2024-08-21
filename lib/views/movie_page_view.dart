@@ -29,7 +29,7 @@ class _MoviePageViewState extends State<MoviePageView> {
       if (movieStore.value is MovieSuccessState) {
         title = (movieStore.value as MovieSuccessState).movie.title ?? '';
       } else {
-        title = 'Erro ao carregar o filme';
+        title = 'Erro ao carregar o título do filme';
       }
 
       isLoading.value = false;
@@ -41,22 +41,23 @@ class _MoviePageViewState extends State<MoviePageView> {
     return BasePageWidget(
       appBar: AppBar(
         title: ValueListenableBuilder(
-            valueListenable: isLoading,
-            builder: (context, value, child) {
-              if (value) {
-                return Shimmer.fromColors(
-                  baseColor: Colors.grey.shade100,
-                  highlightColor: Colors.grey.shade300,
-                  child: Container(
-                    width: 300,
-                    height: 48,
-                    color: Colors.white,
-                  ),
-                );
-              }
+          valueListenable: isLoading,
+          builder: (context, value, child) {
+            if (value) {
+              return Shimmer.fromColors(
+                baseColor: Colors.grey.shade100,
+                highlightColor: Colors.grey.shade300,
+                child: Container(
+                  width: 300,
+                  height: 48,
+                  color: Colors.white,
+                ),
+              );
+            }
 
-              return Text(title);
-            }),
+            return Text(title);
+          },
+        ),
       ),
       body: ValueListenableBuilder(
         valueListenable: movieStore,
