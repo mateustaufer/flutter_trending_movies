@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 import '../controllers/counter_page_controller.dart';
 
 class CounterPageView extends StatefulWidget {
-  const CounterPageView({super.key, required this.title});
-
-  final String title;
+  const CounterPageView({super.key});
 
   @override
   State<CounterPageView> createState() => _MyHomePageState();
@@ -19,7 +17,7 @@ class _MyHomePageState extends State<CounterPageView> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
-        title: Text(widget.title),
+        title: const Text('Couter'),
       ),
       body: Center(
         child: Column(

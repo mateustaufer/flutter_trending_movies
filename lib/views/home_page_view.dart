@@ -1,55 +1,35 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
+import 'package:go_router/go_router.dart';
 
-import '../controllers/home_page_controller.dart';
-import '../data/states/movie_state.dart';
+import '../core/routes/routes.dart';
 import '../widgets/base_page_widget.dart';
-import 'components/movies_list.dart';
 
-class HomePageView extends StatefulWidget {
+class HomePageView extends StatelessWidget {
   const HomePageView({super.key});
-
-  @override
-  State<HomePageView> createState() => _HomePageViewState();
-}
-
-class _HomePageViewState extends State<HomePageView> {
-  HomePageController controller = GetIt.I.get<HomePageController>();
 
   @override
   Widget build(BuildContext context) {
     return BasePageWidget(
       backgroundColor: Colors.grey.shade100,
-      appBar: AppBar(
-        backgroundColor: Colors.grey.shade200,
-        elevation: 4,
-        shadowColor: Colors.grey.shade400,
-        title: const Text(
-          'Trending Movies',
-          style: TextStyle(color: Colors.black),
+      body: Center(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            FilledButton.icon(
+              label: const Text('Trending Movies'),
+              icon: const Icon(Icons.movie_creation_outlined),
+              onPressed: () => context.goNamed(Routes.trendingMovies),
+            ),
+            const SizedBox(height: 8),
+            FilledButton.icon(
+              label: const Text('Flutter Counter'),
+              icon: const Icon(Icons.add),
+              onPressed: () => context.goNamed(Routes.counter),
+            ),
+          ],
         ),
-      ),
-      body: ValueListenableBuilder(
-        valueListenable: controller.movieStore,
-        builder: (context, state, child) {
-          if (state is MovieLoadingState) {
-            return const Center(child: CircularProgressIndicator());
-          }
-
-          if (state is MovieErrorState) {
-            WidgetsBinding.instance.addPostFrameCallback((_) {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(state.message), showCloseIcon: true),
-              );
-            });
-          }
-
-          if (state is MovieSuccessState) {
-            return MoviesList(movies: state.movies);
-          }
-
-          return const Center(child: Text('A lista de filmes está vazia!'));
-        },
       ),
     );
   }
