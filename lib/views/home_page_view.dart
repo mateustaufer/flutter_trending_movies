@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../core/routes/routes.dart';
 import '../widgets/base_page_widget.dart';
@@ -19,16 +20,13 @@ class HomePageView extends StatelessWidget {
             FilledButton.icon(
               label: const Text('Trending Movies'),
               icon: const Icon(Icons.movie_creation_outlined),
-              onPressed: () => Navigator.pushNamed(
-                context,
-                Routes.trendingMovies,
-              ),
+              onPressed: () => context.goNamed(Routes.trendingMovies),
             ),
             const SizedBox(height: 8),
             FilledButton.icon(
               label: const Text('Flutter Counter'),
               icon: const Icon(Icons.add),
-              onPressed: () => Navigator.pushNamed(context, Routes.counter),
+              onPressed: () => context.goNamed(Routes.counter),
             ),
           ],
         ),

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
+import '../../core/routes/routes.dart';
 import '../../data/models/movie_model.dart';
 import '../../widgets/network_image_widget.dart';
 import 'info_row.dart';
@@ -31,15 +33,21 @@ class MovieTile extends StatelessWidget {
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
+              InkWell(
+                onTap: () => context.goNamed(
+                  Routes.movieDetails,
+                  pathParameters: {'id': movie.id.toString()},
                 ),
-                clipBehavior: Clip.antiAlias,
-                child: NetworkImageWidget(
-                  imageUrl: movie.posterPath,
-                  width: 125,
-                  height: 187.5,
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  clipBehavior: Clip.antiAlias,
+                  child: NetworkImageWidget(
+                    imageUrl: movie.posterPath,
+                    width: 125,
+                    height: 187.5,
+                  ),
                 ),
               ),
               const SizedBox(width: 16),
