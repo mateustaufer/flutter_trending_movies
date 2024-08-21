@@ -19,8 +19,10 @@ class HomePageView extends StatelessWidget {
             FilledButton.icon(
               label: const Text('Trending Movies'),
               icon: const Icon(Icons.movie_creation_outlined),
-              onPressed: () =>
-                  Navigator.pushNamed(context, Routes.trendingMovies),
+              onPressed: () => Navigator.pushNamed(
+                context,
+                Routes.trendingMovies,
+              ),
             ),
             const SizedBox(height: 8),
             FilledButton.icon(
