@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../../views/counter_page_view.dart';
 import '../../views/home_page_view.dart';
+import '../../views/movie_page_view.dart';
 import '../../views/splash_screen.dart';
 import '../../views/trending_movies_page_view.dart';
 
@@ -20,6 +21,6 @@ class Routes {
         splashScreen: (context) => const SplashScreen(),
         counter: (context) => const CounterPageView(),
         trendingMovies: (context) => const TrendingMoviesPageView(),
-        //movieDetails: (context) => const MoviePageView(),
+        movieDetails: (context) => const MoviePageView(),
       };
 }
