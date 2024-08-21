@@ -4,14 +4,9 @@ import 'package:go_router/go_router.dart';
 import '../core/routes/routes.dart';
 import '../widgets/base_page_widget.dart';
 
-class HomePageView extends StatefulWidget {
+class HomePageView extends StatelessWidget {
   const HomePageView({super.key});
 
-  @override
-  State<HomePageView> createState() => _HomePageViewState();
-}
-
-class _HomePageViewState extends State<HomePageView> {
   @override
   Widget build(BuildContext context) {
     return BasePageWidget(

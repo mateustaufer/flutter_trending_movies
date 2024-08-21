@@ -6,13 +6,18 @@ import '../data/states/movie_state.dart';
 import '../widgets/base_page_widget.dart';
 import 'components/movies_list.dart';
 
-class TrendingMoviesPage extends StatelessWidget {
+class TrendingMoviesPage extends StatefulWidget {
   const TrendingMoviesPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final controller = GetIt.I.get<TrendingMoviesPageController>();
+  State<TrendingMoviesPage> createState() => _TrendingMoviesPageState();
+}
 
+class _TrendingMoviesPageState extends State<TrendingMoviesPage> {
+  final controller = GetIt.I.get<TrendingMoviesPageController>();
+
+  @override
+  Widget build(BuildContext context) {
     return BasePageWidget(
       backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
