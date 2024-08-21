@@ -1,10 +1,11 @@
 import 'package:http/http.dart' as http;
 
-import 'constants.dart';
+import '../../core/constants.dart';
 import 'network_response.dart';
 
 class Api {
-  static final method = Api();
+  Api._internal();
+  static final instance = Api._internal();
 
   NetworkResponse _getResponse(http.Response response) {
     return NetworkResponse(
