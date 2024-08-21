@@ -19,10 +19,12 @@ void main() {
       when(
         () => provider.fetchMovieDetails(movieId: '348'),
       ).thenAnswer(
-        (_) async => NetworkResponse(
-          body: MovieProviderMock.movieDetailsResponseBody,
-          statusCode: 200,
-        ),
+        (_) async {
+          return NetworkResponse(
+            body: MovieProviderMock.movieDetailsResponseBody,
+            statusCode: 200,
+          );
+        },
       );
 
       await store.fetchMovieDetails(movieId: '348');

@@ -11,7 +11,7 @@ class MovieStore extends ValueNotifier<MovieState> {
   Future<void> fetchMovieDetails({required String movieId}) async {
     value = MovieLoadingState();
 
-    final response = await repository.fetchMovieDetails(movieId: 'day');
+    final response = await repository.fetchMovieDetails(movieId: movieId);
 
     response.fold(
       (l) => value = MovieErrorState(message: l.statusMessage ?? ''),
