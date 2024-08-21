@@ -6,14 +6,14 @@ import '../data/states/movie_state.dart';
 import '../widgets/base_page_widget.dart';
 import 'components/movies_list.dart';
 
-class TrendingMoviesPage extends StatefulWidget {
-  const TrendingMoviesPage({super.key});
+class TrendingMoviesPageView extends StatefulWidget {
+  const TrendingMoviesPageView({super.key});
 
   @override
-  State<TrendingMoviesPage> createState() => _TrendingMoviesPageState();
+  State<TrendingMoviesPageView> createState() => _TrendingMoviesPageState();
 }
 
-class _TrendingMoviesPageState extends State<TrendingMoviesPage> {
+class _TrendingMoviesPageState extends State<TrendingMoviesPageView> {
   final controller = GetIt.I.get<TrendingMoviesPageController>();
 
   @override
