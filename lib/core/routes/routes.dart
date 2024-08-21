@@ -8,8 +8,9 @@ import '../../views/trending_movies_page_view.dart';
 class Routes {
   static const home = '/';
   static const splashScreen = '/welcome';
-  static const trendingMovies = '/trending-movies';
   static const counter = '/counter';
+  static const trendingMovies = '/trending-movies';
+  static const movie = '/trending-movies/movie/:id';
 
   Routes._internal();
   static final instance = Routes._internal();
@@ -17,7 +18,8 @@ class Routes {
   Map<String, Widget Function(BuildContext)> get routes => {
         home: (context) => const HomePageView(),
         splashScreen: (context) => const SplashScreen(),
-        trendingMovies: (context) => const TrendingMoviesPageView(),
         counter: (context) => const CounterPageView(),
+        trendingMovies: (context) => const TrendingMoviesPageView(),
+        movie: (context) => const TrendingMoviesPageView(),
       };
 }
