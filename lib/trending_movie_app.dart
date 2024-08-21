@@ -14,7 +14,12 @@ class TrendingMovieApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      initialRoute: Routes.home,
       routes: Routes.instance.routes,
+      onGenerateRoute: (settings) {
+        print('Route: ${settings.name}');
+        return null;
+      },
     );
   }
 }

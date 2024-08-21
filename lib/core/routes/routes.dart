@@ -10,7 +10,7 @@ class Routes {
   static const splashScreen = '/welcome';
   static const counter = '/counter';
   static const trendingMovies = '/trending-movies';
-  static const movie = '/trending-movies/movie/:id';
+  static const movieDetails = '/trending-movies/movie/:id';
 
   Routes._internal();
   static final instance = Routes._internal();
@@ -20,6 +20,6 @@ class Routes {
         splashScreen: (context) => const SplashScreen(),
         counter: (context) => const CounterPageView(),
         trendingMovies: (context) => const TrendingMoviesPageView(),
-        movie: (context) => const TrendingMoviesPageView(),
+        //movieDetails: (context) => const MoviePageView(),
       };
 }
