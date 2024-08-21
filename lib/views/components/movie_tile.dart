@@ -1,5 +1,5 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/routes/routes.dart';
@@ -34,10 +34,9 @@ class MovieTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               InkWell(
-                onTap: () => Navigator.pushNamed(
-                  context,
-                  Routes.movieDetails.replaceFirst(':id', movie.id.toString()),
-                  arguments: !kIsWeb ? movie : null,
+                onTap: () => context.goNamed(
+                  Routes.movieDetails,
+                  pathParameters: {'id': movie.id.toString()},
                 ),
                 child: Container(
                   decoration: BoxDecoration(
