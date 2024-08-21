@@ -3,7 +3,7 @@ import 'package:flutter/foundation.dart';
 
 import '../models/movie_model.dart';
 import '../models/movies_list_model.dart';
-import '../network/response_error.dart';
+import '../network/error_response.dart';
 import '../providers/movie_provider.dart';
 
 class MovieRepository {
@@ -11,7 +11,7 @@ class MovieRepository {
 
   MovieRepository(this.movieProvider);
 
-  Future<Either<ResponseError, MoviesListModel>> fetchTrendingMoviesList({
+  Future<Either<ErrorResponse, MoviesListModel>> fetchTrendingMoviesList({
     required String timeWindow,
     String language = 'pt-BR',
   }) async {
@@ -22,7 +22,7 @@ class MovieRepository {
       );
 
       if (response.statusCode != 200) {
-        final responseError = ResponseError.fromRawJson(response.body);
+        final responseError = ErrorResponse.fromRawJson(response.body);
         return left(responseError);
       }
 
@@ -34,7 +34,7 @@ class MovieRepository {
       }
 
       return left(
-        ResponseError(
+        ErrorResponse(
           success: false,
           statusCode: 500,
           statusMessage: 'Erro ao buscar a lista de filmes em alta.',
@@ -43,7 +43,7 @@ class MovieRepository {
     }
   }
 
-  Future<Either<ResponseError, MovieModel>> fetchMovieDetails({
+  Future<Either<ErrorResponse, MovieModel>> fetchMovieDetails({
     required String movieId,
     String language = 'pt-BR',
   }) async {
@@ -54,7 +54,7 @@ class MovieRepository {
       );
 
       if (response.statusCode != 200) {
-        final responseError = ResponseError.fromRawJson(response.body);
+        final responseError = ErrorResponse.fromRawJson(response.body);
         return left(responseError);
       }
 
@@ -66,7 +66,7 @@ class MovieRepository {
       }
 
       return left(
-        ResponseError(
+        ErrorResponse(
           success: false,
           statusCode: 500,
           statusMessage: 'Erro ao buscar o filme.',

@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_trending_movies/data/network/error_response.dart';
 import 'package:flutter_trending_movies/data/network/network_response.dart';
-import 'package:flutter_trending_movies/data/network/response_error.dart';
 import 'package:flutter_trending_movies/data/repositories/movie_repository.dart';
 import 'package:flutter_trending_movies/data/states/movie_state.dart';
 import 'package:flutter_trending_movies/data/stores/movie_store.dart';
@@ -14,7 +14,7 @@ void main() {
   final store = MovieStore(repository);
 
   test(
-    'is expected a movie details',
+    'is expected a movie',
     () async {
       when(
         () => provider.fetchMovieDetails(movieId: '348'),
@@ -32,12 +32,12 @@ void main() {
   );
 
   test(
-    'is expected a error when try to fetch a movie details',
+    'is expected a error when try to fetch a movie',
     () async {
       when(
         () => provider.fetchMovieDetails(movieId: '348'),
       ).thenThrow(
-        (_) async => ResponseError(
+        (_) async => ErrorResponse(
           success: false,
           statusCode: 500,
           statusMessage: 'Erro ao buscar o filme.',

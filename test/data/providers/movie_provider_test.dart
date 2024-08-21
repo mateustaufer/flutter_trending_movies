@@ -6,15 +6,17 @@ import 'package:mocktail/mocktail.dart';
 import '../mocks/movie_provider_mock.dart';
 
 void main() {
-  final movieMock = MovieProviderMock();
-  final movieRepository = MovieRepository(movieMock);
+  final movieProviderMock = MovieProviderMock();
+  final movieRepository = MovieRepository(movieProviderMock);
 
-  test('Fetch Trending Movies List', () async {
+  test('Fetch trending movies list', () async {
     when(
-      () => movieMock.fetchTrendingMoviesList(timeWindow: 'day'),
+      () => movieProviderMock.fetchTrendingMoviesList(timeWindow: 'day'),
     ).thenAnswer(
       (_) async => NetworkResponse(
-          body: MovieProviderMock.trendingMoviesReponseBody, statusCode: 200),
+        body: MovieProviderMock.trendingMoviesReponseBody,
+        statusCode: 200,
+      ),
     );
 
     final response = await movieRepository.fetchTrendingMoviesList(
@@ -24,6 +26,24 @@ void main() {
     response.fold(
       (l) => expect(l.statusMessage, isNotEmpty),
       (r) => expect(r.movies, isNotEmpty),
+    );
+  });
+
+  test('Fetch movie details', () async {
+    when(
+      () => movieProviderMock.fetchMovieDetails(movieId: '348'),
+    ).thenAnswer(
+      (_) async => NetworkResponse(
+        body: MovieProviderMock.movieDetailsResponseBody,
+        statusCode: 200,
+      ),
+    );
+
+    final response = await movieRepository.fetchMovieDetails(movieId: '348');
+
+    response.fold(
+      (l) => expect(l.statusMessage, isNotEmpty),
+      (r) => expect(r, isNotNull),
     );
   });
 }

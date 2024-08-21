@@ -14,12 +14,8 @@ class MovieStore extends ValueNotifier<MovieState> {
     final response = await repository.fetchMovieDetails(movieId: 'day');
 
     response.fold(
-      (l) {
-        value = MovieErrorState(message: l.statusMessage ?? '');
-      },
-      (r) {
-        value = MovieSuccessState(movie: r);
-      },
+      (l) => value = MovieErrorState(message: l.statusMessage ?? ''),
+      (r) => value = MovieSuccessState(movie: r),
     );
   }
 }

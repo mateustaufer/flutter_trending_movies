@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_trending_movies/data/network/error_response.dart';
 import 'package:flutter_trending_movies/data/network/network_response.dart';
-import 'package:flutter_trending_movies/data/network/response_error.dart';
 import 'package:flutter_trending_movies/data/repositories/movie_repository.dart';
 import 'package:flutter_trending_movies/data/states/trending_movies_state.dart';
 import 'package:flutter_trending_movies/data/stores/trending_movies_store.dart';
@@ -41,7 +41,7 @@ void main() {
       when(
         () => provider.fetchTrendingMoviesList(timeWindow: 'day'),
       ).thenThrow(
-        (_) async => ResponseError(
+        (_) async => ErrorResponse(
           success: false,
           statusCode: 500,
           statusMessage: 'Erro ao buscar a lista de filmes em alta.',
