@@ -37,7 +37,7 @@ class MovieRepository {
         ResponseError(
           success: false,
           statusCode: 500,
-          statusMessage: 'Erro ao buscar a lista de filmes mais assistidos.',
+          statusMessage: 'Erro ao buscar a lista de filmes em alta.',
         ),
       );
     }
