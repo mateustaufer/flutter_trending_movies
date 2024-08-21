@@ -18,22 +18,11 @@ class MoviePageView extends StatefulWidget {
 class _MoviePageViewState extends State<MoviePageView> {
   final movieStore = GetIt.I.get<MovieStore>();
 
-  final isLoading = ValueNotifier<bool>(true);
-  late final String title;
-
   @override
   void initState() {
     super.initState();
 
-    movieStore.fetchMovieDetails(movieId: widget.id).whenComplete(() {
-      if (movieStore.value is MovieSuccessState) {
-        title = (movieStore.value as MovieSuccessState).movie.title ?? '';
-      } else {
-        title = 'Erro ao carregar o título do filme';
-      }
-
-      isLoading.value = false;
-    });
+    movieStore.fetchMovieDetails(movieId: widget.id);
   }
 
   @override
@@ -41,9 +30,13 @@ class _MoviePageViewState extends State<MoviePageView> {
     return BasePageWidget(
       appBar: AppBar(
         title: ValueListenableBuilder(
-          valueListenable: isLoading,
-          builder: (context, value, child) {
-            if (value) {
+          valueListenable: movieStore,
+          builder: (context, state, child) {
+            if (state is MovieInitialState) {
+              return const Text('Carregando...');
+            }
+
+            if (state is MovieLoadingState) {
               return Shimmer.fromColors(
                 baseColor: Colors.grey.shade100,
                 highlightColor: Colors.grey.shade300,
@@ -55,7 +48,11 @@ class _MoviePageViewState extends State<MoviePageView> {
               );
             }
 
-            return Text(title);
+            if (state is MovieSuccessState) {
+              return Text((state.movie.title ?? ''));
+            }
+
+            return const Text('Erro ao carregar o título do filme');
           },
         ),
       ),
