@@ -17,4 +17,20 @@ class MovieProvider {
       rethrow;
     }
   }
+
+  Future<NetworkResponse> fetchMovieDetails({
+    required String movieId,
+    String language = 'pt-BR',
+  }) async {
+    try {
+      final response = await Api.instance.get(
+        path: 'movie/$movieId',
+        queryParameters: {'language': language},
+      );
+
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
