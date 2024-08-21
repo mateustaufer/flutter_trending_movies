@@ -7,7 +7,7 @@ class MovieProvider {
     String language = 'pt-BR',
   }) async {
     try {
-      final response = await Api().get(
+      final response = await Api.instance.get(
         path: 'trending/movie/$timeWindow',
         queryParameters: {'language': language},
       );

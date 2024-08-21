@@ -5,7 +5,7 @@ import 'package:flutter_trending_movies/views/counter_page_view.dart';
 void main() {
   testWidgets('Counter increments smoke test', (WidgetTester tester) async {
     await tester.pumpWidget(
-      const MaterialApp(home: CounterPageView(title: 'Counter')),
+      const MaterialApp(home: CounterPageView()),
     );
 
     expect(find.text('0'), findsOneWidget);

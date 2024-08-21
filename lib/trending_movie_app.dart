@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import 'routes.dart';
+import 'core/routes/routes.dart';
 
 class TrendingMovieApp extends StatelessWidget {
   const TrendingMovieApp({super.key});
@@ -14,7 +14,7 @@ class TrendingMovieApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      routerConfig: Routes.routerConfig,
+      routerConfig: Routes.instance.routerConfig,
     );
   }
 }

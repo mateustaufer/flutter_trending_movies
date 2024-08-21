@@ -5,8 +5,7 @@ import 'network_response.dart';
 
 class Api {
   Api._internal();
-  static final _instance = Api._internal();
-  factory Api() => _instance;
+  static final instance = Api._internal();
 
   NetworkResponse _getResponse(http.Response response) {
     return NetworkResponse(
