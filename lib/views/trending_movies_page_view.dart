@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-import '../controllers/trending_movies_page_controller.dart';
-import '../data/states/movie_state.dart';
+import '../data/states/trending_movies_state.dart';
+import '../data/stores/trending_movies_store.dart';
 import '../widgets/base_page_widget.dart';
 import 'components/movies_list.dart';
 
@@ -14,7 +14,14 @@ class TrendingMoviesPageView extends StatefulWidget {
 }
 
 class _TrendingMoviesPageState extends State<TrendingMoviesPageView> {
-  final controller = GetIt.I.get<TrendingMoviesPageController>();
+  final trendingMoviesStore = GetIt.I.get<TrendingMoviesStore>();
+
+  @override
+  void initState() {
+    super.initState();
+
+    trendingMoviesStore.fetchTrendingMoviesList();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,13 +37,13 @@ class _TrendingMoviesPageState extends State<TrendingMoviesPageView> {
         ),
       ),
       body: ValueListenableBuilder(
-        valueListenable: controller.movieStore,
+        valueListenable: trendingMoviesStore,
         builder: (context, state, child) {
-          if (state is MovieLoadingState) {
+          if (state is TrendingMoviesLoadingState) {
             return const Center(child: CircularProgressIndicator());
           }
 
-          if (state is MovieErrorState) {
+          if (state is TrendingMoviesErrorState) {
             WidgetsBinding.instance.addPostFrameCallback((_) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(content: Text(state.message), showCloseIcon: true),
@@ -44,7 +51,7 @@ class _TrendingMoviesPageState extends State<TrendingMoviesPageView> {
             });
           }
 
-          if (state is MovieSuccessState) {
+          if (state is TrendingMoviesSuccessState) {
             return MoviesList(movies: state.movies);
           }
 

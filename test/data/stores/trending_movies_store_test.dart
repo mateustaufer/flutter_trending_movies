@@ -2,8 +2,8 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_trending_movies/data/network/error_response.dart';
 import 'package:flutter_trending_movies/data/network/network_response.dart';
 import 'package:flutter_trending_movies/data/repositories/movie_repository.dart';
-import 'package:flutter_trending_movies/data/states/movie_state.dart';
-import 'package:flutter_trending_movies/data/stores/movie_store.dart';
+import 'package:flutter_trending_movies/data/states/trending_movies_state.dart';
+import 'package:flutter_trending_movies/data/stores/trending_movies_store.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../mocks/movie_provider_mock.dart';
@@ -11,44 +11,46 @@ import '../mocks/movie_provider_mock.dart';
 void main() {
   final provider = MovieProviderMock();
   final repository = MovieRepository(provider);
-  final store = MovieStore(repository);
+  final store = TrendingMoviesStore(repository);
 
   test(
-    'is expected a movie',
+    'is expected a trending movies list',
     () async {
       when(
-        () => provider.fetchMovieDetails(movieId: '348'),
+        () {
+          return provider.fetchTrendingMoviesList(timeWindow: 'day');
+        },
       ).thenAnswer(
         (_) async {
           return NetworkResponse(
-            body: MovieProviderMock.movieDetailsResponseBody,
+            body: MovieProviderMock.trendingMoviesReponseBody,
             statusCode: 200,
           );
         },
       );
 
-      await store.fetchMovieDetails(movieId: '348');
+      await store.fetchTrendingMoviesList();
 
-      expect(store.value, isA<MovieSuccessState>());
+      expect(store.value, isA<TrendingMoviesSuccessState>());
     },
   );
 
   test(
-    'is expected a error when try to fetch a movie',
+    'is expected a error when try to fetch a trending movies list',
     () async {
       when(
-        () => provider.fetchMovieDetails(movieId: '348'),
+        () => provider.fetchTrendingMoviesList(timeWindow: 'day'),
       ).thenThrow(
         (_) async => ErrorResponse(
           success: false,
           statusCode: 500,
-          statusMessage: 'Erro ao buscar o filme.',
+          statusMessage: 'Erro ao buscar a lista de filmes em alta.',
         ),
       );
 
-      await store.fetchMovieDetails(movieId: '348');
+      await store.fetchTrendingMoviesList();
 
-      expect(store.value, isA<MovieErrorState>());
+      expect(store.value, isA<TrendingMoviesErrorState>());
     },
   );
 }
