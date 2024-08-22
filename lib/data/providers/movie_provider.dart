@@ -1,3 +1,5 @@
+import 'package:flutter/foundation.dart';
+
 import '../network/api.dart';
 import '../network/network_response.dart';
 
@@ -13,7 +15,33 @@ class MovieProvider {
       );
 
       return response;
-    } catch (e) {
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('MovieProvider fetchTrendingMoviesList Error ==> $e');
+        print('MovieProvider fetchTrendingMoviesList Stack ==> $s');
+      }
+
+      rethrow;
+    }
+  }
+
+  Future<NetworkResponse> fetchMovieDetails({
+    required String movieId,
+    String language = 'pt-BR',
+  }) async {
+    try {
+      final response = await Api.instance.get(
+        path: 'movie/$movieId',
+        queryParameters: {'language': language},
+      );
+
+      return response;
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('MovieProvider fetchMovieDetails Error ==> $e');
+        print('MovieProvider fetchMovieDetails Stack ==> $s');
+      }
+
       rethrow;
     }
   }

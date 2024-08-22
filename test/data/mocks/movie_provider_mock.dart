@@ -1,8 +1,8 @@
 import 'package:flutter_trending_movies/data/providers/movie_provider.dart';
 import 'package:mocktail/mocktail.dart';
 
-class MovieMock extends Mock implements MovieProvider {
-  static const responseBody = '''{
+class MovieProviderMock extends Mock implements MovieProvider {
+  static const trendingMoviesReponseBody = '''{
   "page": 1,
   "results": [
     {
@@ -428,5 +428,79 @@ class MovieMock extends Mock implements MovieProvider {
   ],
   "total_pages": 1000,
   "total_results": 20000
+}''';
+
+  static const movieDetailsResponseBody = '''{
+  "adult": false,
+  "backdrop_path": "/AmR3JG1VQVxU8TfAvljUhfSFUOx.jpg",
+  "belongs_to_collection": {
+    "id": 8091,
+    "name": "Alien: Coleção",
+    "poster_path": "/AgyQCf3kUqWgCZifYkFYeZN1ddC.jpg",
+    "backdrop_path": "/6X42JnSMdo3dPAswOHUuvebdTq7.jpg"
+  },
+  "budget": 11000000,
+  "genres": [
+    {
+      "id": 27,
+      "name": "Terror"
+    },
+    {
+      "id": 878,
+      "name": "Ficção científica"
+    }
+  ],
+  "homepage": "",
+  "id": 348,
+  "imdb_id": "tt0078748",
+  "origin_country": [
+    "US"
+  ],
+  "original_language": "en",
+  "original_title": "Alien",
+  "overview": "Quando a tripulação da sonda espacial Nostromo responde a um pedido de socorro vindo de um planeta inóspito, eles descobrem uma forma de vida mortal que se reproduz dentro de humanos. Agora, a tripulação deve lutar para permanecer viva e impedir que a criatura chegue até a Terra.",
+  "popularity": 550.536,
+  "poster_path": "/6f8iChug1FYFu0vLFYLO1YpO1Dz.jpg",
+  "production_companies": [
+    {
+      "id": 25,
+      "logo_path": "/qZCc1lty5FzX30aOCVRBLzaVmcp.png",
+      "name": "20th Century Fox",
+      "origin_country": "US"
+    },
+    {
+      "id": 401,
+      "logo_path": "/t7mM3DvQ9MwDT3YzMCBrkWpWiiz.png",
+      "name": "Brandywine Productions",
+      "origin_country": "US"
+    }
+  ],
+  "production_countries": [
+    {
+      "iso_3166_1": "US",
+      "name": "United States of America"
+    }
+  ],
+  "release_date": "1979-05-25",
+  "revenue": 104931801,
+  "runtime": 117,
+  "spoken_languages": [
+    {
+      "english_name": "English",
+      "iso_639_1": "en",
+      "name": "English"
+    },
+    {
+      "english_name": "Spanish",
+      "iso_639_1": "es",
+      "name": "Español"
+    }
+  ],
+  "status": "Released",
+  "tagline": "No espaço, ninguém te ouvirá gritar.",
+  "title": "Alien: O Oitavo Passageiro",
+  "video": false,
+  "vote_average": 8.156,
+  "vote_count": 14305
 }''';
 }

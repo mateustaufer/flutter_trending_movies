@@ -8,19 +8,14 @@ class MovieStore extends ValueNotifier<MovieState> {
 
   MovieStore(this.repository) : super(MovieInitialState());
 
-  Future<void> fetchTrendingMoviesList() async {
+  Future<void> fetchMovieDetails({required String movieId}) async {
     value = MovieLoadingState();
 
-    final response =
-        await repository.fetchTrendingMoviesList(timeWindow: 'day');
+    final response = await repository.fetchMovieDetails(movieId: movieId);
 
     response.fold(
-      (l) {
-        value = MovieErrorState(message: l.statusMessage ?? '');
-      },
-      (r) {
-        value = MovieSuccessState(movies: r.movies ?? []);
-      },
+      (l) => value = MovieErrorState(message: l.statusMessage ?? ''),
+      (r) => value = MovieSuccessState(movie: r),
     );
   }
 }
