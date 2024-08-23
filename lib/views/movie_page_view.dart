@@ -45,11 +45,7 @@ class _MoviePageViewState extends State<MoviePageView> {
               return Shimmer.fromColors(
                 baseColor: Colors.grey.shade100,
                 highlightColor: Colors.grey.shade300,
-                child: Container(
-                  width: 300,
-                  height: 48,
-                  color: Colors.white,
-                ),
+                child: Container(width: 300, height: 48, color: Colors.white),
               );
             }
 
