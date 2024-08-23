@@ -20,4 +20,37 @@ class Routes {
     trendingMovies: (_) => const TrendingMoviesPageView(),
     movieDetails: (_) => const MoviePageView(),
   };
+
+  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+    final uri = Uri.parse(settings.name!);
+
+    final parameters = <String, String>{};
+    parameters.addAll(uri.queryParameters);
+    if (settings.arguments != null &&
+        settings.arguments is Map<String, String>) {
+      parameters.addAll(settings.arguments as Map<String, String>);
+    }
+
+    String name = settings.name ?? '';
+    if (!name.contains('?')) {
+      String parameterString = parameters.entries.isNotEmpty ? '?' : '';
+      parameters.forEach((key, value) {
+        parameterString += '$key=$value&';
+      });
+
+      name = '${settings.name}$parameterString';
+    }
+
+    if (routes.containsKey(uri.path)) {
+      return MaterialPageRoute(
+        builder: routes[uri.path]!,
+        settings: RouteSettings(arguments: parameters, name: name),
+      );
+    }
+
+    return MaterialPageRoute(
+      builder: routes[home]!,
+      settings: RouteSettings(arguments: parameters, name: name),
+    );
+  }
 }
