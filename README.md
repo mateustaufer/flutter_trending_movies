@@ -1,4 +1,4 @@
-# flutter_trending_movies
+# Flutter Trending Movies
 
 A simple Flutter Web App that shows a trending movies list from TMDB API.
 
