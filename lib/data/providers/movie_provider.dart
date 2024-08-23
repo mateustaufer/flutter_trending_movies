@@ -1,7 +1,6 @@
-import 'dart:convert';
-
 import 'package:flutter/foundation.dart';
 
+import '../models/error_response_body.dart';
 import '../network/api.dart';
 import '../network/network_response.dart';
 
@@ -23,14 +22,16 @@ class MovieProvider {
         print('MovieProvider fetchTrendingMoviesList Stack ==> $s');
       }
 
-      final errorJsonBody = {
-        'success': false,
-        'status_code': 500,
-        'status_message': 'MovieProvider fetchTrendingMoviesList',
-        'error_message': '${e.toString()}: ${s.toString()}',
-      };
+      final errorResponse = ErrorResponseBody.fromCatch(
+        error: e,
+        stackTrace: s,
+        className: 'MovieProvider',
+        methodName: 'fetchTrendingMoviesList',
+      );
 
-      return NetworkResponse(body: jsonEncode(errorJsonBody), statusCode: 500);
+      final errorJsonBody = errorResponse.toRawJson();
+
+      return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
   }
 
@@ -51,14 +52,16 @@ class MovieProvider {
         print('MovieProvider fetchMovieDetails Stack ==> $s');
       }
 
-      final errorJsonBody = {
-        'success': false,
-        'status_code': 500,
-        'status_message': 'MovieProvider fetchMovieDetails',
-        'error_message': '${e.toString()}: ${s.toString()}',
-      };
+      final errorResponse = ErrorResponseBody.fromCatch(
+        error: e,
+        stackTrace: s,
+        className: 'MovieProvider',
+        methodName: 'fetchMovieDetails',
+      );
 
-      return NetworkResponse(body: jsonEncode(errorJsonBody), statusCode: 500);
+      final errorJsonBody = errorResponse.toRawJson();
+
+      return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
   }
 }
