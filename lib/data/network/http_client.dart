@@ -3,12 +3,10 @@ import 'package:http/http.dart' as http;
 
 import '../../core/constants/constants.dart';
 import '../models/error_response_body.dart';
+import 'api_client.dart';
 import 'network_response.dart';
 
-class Api {
-  Api._internal();
-  static final instance = Api._internal();
-
+class HttpClient implements ApiClient {
   NetworkResponse _getResponse(http.Response response) {
     return NetworkResponse(
       body: response.body,
@@ -27,6 +25,7 @@ class Api {
     };
   }
 
+  @override
   Future<NetworkResponse> get({
     required String path,
     Map<String, dynamic>? queryParameters,
@@ -62,14 +61,20 @@ class Api {
     }
   }
 
+  @override
   Future<NetworkResponse> post({
     required String path,
+    Map<String, dynamic>? queryParameters,
     required Map<String, dynamic> body,
     bool isAuthenticated = true,
   }) async {
     try {
       final response = await http.post(
-        Uri.https(Constants.baseUrl, '${Constants.apiVersion}/$path'),
+        Uri.https(
+          Constants.baseUrl,
+          '${Constants.apiVersion}/$path',
+          queryParameters,
+        ),
         body: body,
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
@@ -94,14 +99,20 @@ class Api {
     }
   }
 
+  @override
   Future<NetworkResponse> put({
     required String path,
+    Map<String, dynamic>? queryParameters,
     required Map<String, dynamic> body,
     bool isAuthenticated = true,
   }) async {
     try {
       final response = await http.put(
-        Uri.https(Constants.baseUrl, '${Constants.apiVersion}/$path'),
+        Uri.https(
+          Constants.baseUrl,
+          '${Constants.apiVersion}/$path',
+          queryParameters,
+        ),
         body: body,
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
@@ -126,13 +137,19 @@ class Api {
     }
   }
 
+  @override
   Future<NetworkResponse> delete({
     required String path,
+    Map<String, dynamic>? queryParameters,
     bool isAuthenticated = true,
   }) async {
     try {
       final response = await http.delete(
-        Uri.https(Constants.baseUrl, '${Constants.apiVersion}/$path'),
+        Uri.https(
+          Constants.baseUrl,
+          '${Constants.apiVersion}/$path',
+          queryParameters,
+        ),
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
 
@@ -156,14 +173,20 @@ class Api {
     }
   }
 
+  @override
   Future<NetworkResponse> patch({
     required String path,
+    Map<String, dynamic>? queryParameters,
     required Map<String, dynamic> body,
     bool isAuthenticated = true,
   }) async {
     try {
       final response = await http.patch(
-        Uri.https(Constants.baseUrl, '${Constants.apiVersion}/$path'),
+        Uri.https(
+          Constants.baseUrl,
+          '${Constants.apiVersion}/$path',
+          queryParameters,
+        ),
         body: body,
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
@@ -188,13 +211,19 @@ class Api {
     }
   }
 
+  @override
   Future<NetworkResponse> head({
     required String path,
+    Map<String, dynamic>? queryParameters,
     bool isAuthenticated = true,
   }) async {
     try {
       final response = await http.head(
-        Uri.https(Constants.baseUrl, '${Constants.apiVersion}/$path'),
+        Uri.https(
+          Constants.baseUrl,
+          '${Constants.apiVersion}/$path',
+          queryParameters,
+        ),
         headers: _getHeaders(isAuthenticated: isAuthenticated),
       );
 

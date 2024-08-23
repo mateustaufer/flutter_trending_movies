@@ -1,16 +1,20 @@
 import 'package:flutter/foundation.dart';
 
 import '../models/error_response_body.dart';
-import '../network/api.dart';
+import '../network/api_client.dart';
 import '../network/network_response.dart';
 
 class MovieProvider {
+  final ApiClient apiClient;
+
+  MovieProvider(this.apiClient);
+
   Future<NetworkResponse> fetchTrendingMoviesList({
     required String timeWindow,
     String language = 'pt-BR',
   }) async {
     try {
-      final response = await Api.instance.get(
+      final response = await apiClient.get(
         path: 'trending/movie/$timeWindow',
         queryParameters: {'language': language},
       );
@@ -40,7 +44,7 @@ class MovieProvider {
     String language = 'pt-BR',
   }) async {
     try {
-      final response = await Api.instance.get(
+      final response = await apiClient.get(
         path: 'movie/$movieId',
         queryParameters: {'language': language},
       );
