@@ -127,8 +127,6 @@ class MovieModel {
   factory MovieModel.fromRawJson(String str) =>
       MovieModel.fromJson(json.decode(str));
 
-  String toRawJson() => json.encode(toJson());
-
   MovieModel.fromJson(Map<String, dynamic> json) {
     backdropPath = json['backdrop_path'];
     id = int.tryParse(json['id'].toString());
@@ -203,6 +201,8 @@ class MovieModel {
     status = json['status'];
     tagline = json['tagline'];
   }
+
+  String toRawJson() => json.encode(toJson());
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};

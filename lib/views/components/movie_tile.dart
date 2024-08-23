@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 
 import '../../core/routes/routes.dart';
@@ -21,10 +20,7 @@ class MovieTile extends StatelessWidget {
         clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
-          side: BorderSide(
-            color: Colors.grey.shade300,
-            width: 1,
-          ),
+          side: BorderSide(color: Colors.grey.shade300, width: 1),
         ),
         shadowColor: Colors.grey.shade400,
         child: Container(
@@ -34,9 +30,10 @@ class MovieTile extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               InkWell(
-                onTap: () => context.goNamed(
+                onTap: () => Navigator.pushNamed(
+                  context,
                   Routes.movieDetails,
-                  pathParameters: {'id': movie.id.toString()},
+                  arguments: {'id': movie.id.toString()},
                 ),
                 child: Container(
                   decoration: BoxDecoration(
@@ -72,8 +69,9 @@ class MovieTile extends StatelessWidget {
                       const SizedBox(height: 8),
                       InfoRow(
                         infoTitle: 'Data de lançamento:',
-                        info:
-                            DateFormat("dd/MM/yyyy").format(movie.releaseDate!),
+                        info: DateFormat("dd/MM/yyyy").format(
+                          movie.releaseDate!,
+                        ),
                       ),
                     ],
                     if (movie.voteAverage != null &&

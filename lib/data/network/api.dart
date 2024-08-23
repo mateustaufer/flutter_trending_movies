@@ -1,6 +1,8 @@
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
-import '../../core/constants.dart';
+import '../../core/constants/constants.dart';
+import '../models/error_response_body.dart';
 import 'network_response.dart';
 
 class Api {
@@ -41,8 +43,22 @@ class Api {
       );
 
       return _getResponse(response);
-    } catch (e) {
-      rethrow;
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Api get Error ==> $e');
+        print('Api get Stack ==> $s');
+      }
+
+      final errorResponse = ErrorResponseBody.fromCatch(
+        error: e,
+        stackTrace: s,
+        className: 'Api',
+        methodName: 'get',
+      );
+
+      final errorJsonBody = errorResponse.toRawJson();
+
+      return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
   }
 
@@ -59,8 +75,22 @@ class Api {
       );
 
       return _getResponse(response);
-    } catch (e) {
-      rethrow;
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Api post Error ==> $e');
+        print('Api post Stack ==> $s');
+      }
+
+      final errorResponse = ErrorResponseBody.fromCatch(
+        error: e,
+        stackTrace: s,
+        className: 'Api',
+        methodName: 'post',
+      );
+
+      final errorJsonBody = errorResponse.toRawJson();
+
+      return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
   }
 
@@ -77,8 +107,22 @@ class Api {
       );
 
       return _getResponse(response);
-    } catch (e) {
-      rethrow;
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Api put Error ==> $e');
+        print('Api put Stack ==> $s');
+      }
+
+      final errorResponse = ErrorResponseBody.fromCatch(
+        error: e,
+        stackTrace: s,
+        className: 'Api',
+        methodName: 'put',
+      );
+
+      final errorJsonBody = errorResponse.toRawJson();
+
+      return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
   }
 
@@ -93,8 +137,22 @@ class Api {
       );
 
       return _getResponse(response);
-    } catch (e) {
-      rethrow;
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Api delete Error ==> $e');
+        print('Api delete Stack ==> $s');
+      }
+
+      final errorResponse = ErrorResponseBody.fromCatch(
+        error: e,
+        stackTrace: s,
+        className: 'Api',
+        methodName: 'delete',
+      );
+
+      final errorJsonBody = errorResponse.toRawJson();
+
+      return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
   }
 
@@ -111,8 +169,22 @@ class Api {
       );
 
       return _getResponse(response);
-    } catch (e) {
-      rethrow;
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Api patch Error ==> $e');
+        print('Api patch Stack ==> $s');
+      }
+
+      final errorResponse = ErrorResponseBody.fromCatch(
+        error: e,
+        stackTrace: s,
+        className: 'Api',
+        methodName: 'patch',
+      );
+
+      final errorJsonBody = errorResponse.toRawJson();
+
+      return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
   }
 
@@ -127,8 +199,22 @@ class Api {
       );
 
       return _getResponse(response);
-    } catch (e) {
-      rethrow;
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Api head Error ==> $e');
+        print('Api head Stack ==> $s');
+      }
+
+      final errorResponse = ErrorResponseBody.fromCatch(
+        error: e,
+        stackTrace: s,
+        className: 'Api',
+        methodName: 'patch',
+      );
+
+      final errorJsonBody = errorResponse.toRawJson();
+
+      return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
   }
 }
