@@ -15,6 +15,7 @@ class TrendingMovieApp extends StatelessWidget {
         useMaterial3: true,
       ),
       onGenerateRoute: Routes.onGenerateRoute,
+      initialRoute: Routes.home,
     );
   }
 }
