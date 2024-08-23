@@ -33,8 +33,6 @@ class UserModel {
   factory UserModel.fromRawJson(String str) =>
       UserModel.fromJson(json.decode(str));
 
-  String toRawJson() => json.encode(toJson());
-
   UserModel.fromJson(Map<String, dynamic> json) {
     avatarPath = json['avatar_path'];
     gravatarHash = json['gravatar_hash'];
@@ -42,6 +40,8 @@ class UserModel {
     name = json['name'];
     username = json['username'];
   }
+
+  String toRawJson() => json.encode(toJson());
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};

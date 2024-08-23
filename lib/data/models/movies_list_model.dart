@@ -88,8 +88,6 @@ class MoviesListModel {
   factory MoviesListModel.fromRawJson(String str) =>
       MoviesListModel.fromJson(json.decode(str));
 
-  String toRawJson() => json.encode(toJson());
-
   MoviesListModel.fromJson(Map<String, dynamic> json) {
     averageRating = json['average_rating'];
     backdropPath = json['backdrop_path'];
@@ -120,6 +118,8 @@ class MoviesListModel {
     totalPages = json['total_pages'];
     totalResults = json['total_results'];
   }
+
+  String toRawJson() => json.encode(toJson());
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};

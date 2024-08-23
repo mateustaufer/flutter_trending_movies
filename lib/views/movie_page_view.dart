@@ -7,9 +7,7 @@ import '../data/stores/movie_store.dart';
 import '../widgets/base_page_widget.dart';
 
 class MoviePageView extends StatefulWidget {
-  final String id;
-
-  const MoviePageView({super.key, required this.id});
+  const MoviePageView({super.key});
 
   @override
   State<MoviePageView> createState() => _MoviePageViewState();
@@ -22,7 +20,14 @@ class _MoviePageViewState extends State<MoviePageView> {
   void initState() {
     super.initState();
 
-    movieStore.fetchMovieDetails(movieId: widget.id);
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final arguments =
+          ModalRoute.of(context)?.settings.arguments as Map<String, String>?;
+
+      if (arguments?.containsKey('id') ?? false) {
+        movieStore.fetchMovieDetails(movieId: arguments?['id'] ?? '');
+      }
+    });
   }
 
   @override
@@ -40,11 +45,7 @@ class _MoviePageViewState extends State<MoviePageView> {
               return Shimmer.fromColors(
                 baseColor: Colors.grey.shade100,
                 highlightColor: Colors.grey.shade300,
-                child: Container(
-                  width: 300,
-                  height: 48,
-                  color: Colors.white,
-                ),
+                child: Container(width: 300, height: 48, color: Colors.white),
               );
             }
 

@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 
+import '../models/error_response_body.dart';
 import '../network/api.dart';
 import '../network/network_response.dart';
 
@@ -21,7 +22,16 @@ class MovieProvider {
         print('MovieProvider fetchTrendingMoviesList Stack ==> $s');
       }
 
-      rethrow;
+      final errorResponse = ErrorResponseBody.fromCatch(
+        error: e,
+        stackTrace: s,
+        className: 'MovieProvider',
+        methodName: 'fetchTrendingMoviesList',
+      );
+
+      final errorJsonBody = errorResponse.toRawJson();
+
+      return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
   }
 
@@ -42,7 +52,16 @@ class MovieProvider {
         print('MovieProvider fetchMovieDetails Stack ==> $s');
       }
 
-      rethrow;
+      final errorResponse = ErrorResponseBody.fromCatch(
+        error: e,
+        stackTrace: s,
+        className: 'MovieProvider',
+        methodName: 'fetchMovieDetails',
+      );
+
+      final errorJsonBody = errorResponse.toRawJson();
+
+      return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
   }
 }
