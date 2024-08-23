@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'app.dart';
 import 'core/bindings/bindings.dart';
-import 'trending_movie_app.dart';
 import 'utils/configure_nonweb.dart'
     if (dart.library.html) 'utils/configure_web.dart';
 
@@ -11,5 +11,5 @@ void main() {
 
   Bindings.init();
 
-  runApp(const TrendingMovieApp());
+  runApp(const App());
 }
