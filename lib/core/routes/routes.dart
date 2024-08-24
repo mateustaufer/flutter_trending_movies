@@ -42,15 +42,17 @@ class Routes {
     }
 
     if (routes.containsKey(uri.path)) {
-      return MaterialPageRoute(
-        builder: routes[uri.path]!,
+      return PageRouteBuilder(
+        pageBuilder: (context, _, __) => routes[uri.path]!(context),
         settings: RouteSettings(arguments: parameters, name: name),
       );
     }
 
-    return MaterialPageRoute(
-      builder: routes[home]!,
+    return PageRouteBuilder(
+      pageBuilder: (context, _, __) => routes[home]!(context),
       settings: RouteSettings(arguments: parameters, name: name),
+      transitionDuration: Duration.zero,
+      reverseTransitionDuration: Duration.zero,
     );
   }
 }

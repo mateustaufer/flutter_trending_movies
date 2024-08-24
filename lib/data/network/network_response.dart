@@ -6,4 +6,7 @@ class NetworkResponse {
     required this.body,
     required this.statusCode,
   });
+
+  @override
+  String toString() => 'NetworkResponse(body: $body, statusCode: $statusCode)';
 }
