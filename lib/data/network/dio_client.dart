@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -26,7 +24,7 @@ class DioClient implements ApiClient {
 
   NetworkResponse _getResponse(Response response) {
     return NetworkResponse(
-      body: jsonEncode(response.data),
+      body: response.data,
       statusCode: response.statusCode ?? 500,
     );
   }
@@ -44,7 +42,7 @@ class DioClient implements ApiClient {
     bool isAuthenticated = true,
   }) async {
     try {
-      final response = await _dio.get(
+      final response = await _dio.get<String>(
         path,
         queryParameters: queryParameters,
         options: _getOptions(isAuthenticated: isAuthenticated),
@@ -78,7 +76,7 @@ class DioClient implements ApiClient {
     bool isAuthenticated = true,
   }) async {
     try {
-      final response = await _dio.post(
+      final response = await _dio.post<String>(
         path,
         queryParameters: queryParameters,
         data: body,
@@ -106,13 +104,48 @@ class DioClient implements ApiClient {
   }
 
   @override
+  Future<NetworkResponse> put({
+    required String path,
+    Map<String, dynamic>? queryParameters,
+    required Map<String, dynamic> body,
+    bool isAuthenticated = true,
+  }) async {
+    try {
+      final response = await _dio.put<String>(
+        path,
+        queryParameters: queryParameters,
+        data: body,
+        options: _getOptions(isAuthenticated: isAuthenticated),
+      );
+
+      return _getResponse(response);
+    } catch (e, s) {
+      if (kDebugMode) {
+        print('Api put Error ==> $e');
+        print('Api put Stack ==> $s');
+      }
+
+      final errorResponse = ErrorResponseBody.fromCatch(
+        error: e,
+        stackTrace: s,
+        className: 'Api',
+        methodName: 'put',
+      );
+
+      final errorJsonBody = errorResponse.toRawJson();
+
+      return NetworkResponse(body: errorJsonBody, statusCode: 500);
+    }
+  }
+
+  @override
   Future<NetworkResponse> delete({
     required String path,
     Map<String, dynamic>? queryParameters,
     bool isAuthenticated = true,
   }) async {
     try {
-      final response = await _dio.delete(
+      final response = await _dio.delete<String>(
         path,
         queryParameters: queryParameters,
         options: _getOptions(isAuthenticated: isAuthenticated),
@@ -139,39 +172,6 @@ class DioClient implements ApiClient {
   }
 
   @override
-  Future<NetworkResponse> head({
-    required String path,
-    Map<String, dynamic>? queryParameters,
-    bool isAuthenticated = true,
-  }) async {
-    try {
-      final response = await _dio.head(
-        path,
-        queryParameters: queryParameters,
-        options: _getOptions(isAuthenticated: isAuthenticated),
-      );
-
-      return _getResponse(response);
-    } catch (e, s) {
-      if (kDebugMode) {
-        print('Api head Error ==> $e');
-        print('Api head Stack ==> $s');
-      }
-
-      final errorResponse = ErrorResponseBody.fromCatch(
-        error: e,
-        stackTrace: s,
-        className: 'Api',
-        methodName: 'head',
-      );
-
-      final errorJsonBody = errorResponse.toRawJson();
-
-      return NetworkResponse(body: errorJsonBody, statusCode: 500);
-    }
-  }
-
-  @override
   Future<NetworkResponse> patch({
     required String path,
     Map<String, dynamic>? queryParameters,
@@ -179,7 +179,7 @@ class DioClient implements ApiClient {
     bool isAuthenticated = true,
   }) async {
     try {
-      final response = await _dio.patch(
+      final response = await _dio.patch<String>(
         path,
         queryParameters: queryParameters,
         data: body,
@@ -207,32 +207,30 @@ class DioClient implements ApiClient {
   }
 
   @override
-  Future<NetworkResponse> put({
+  Future<NetworkResponse> head({
     required String path,
     Map<String, dynamic>? queryParameters,
-    required Map<String, dynamic> body,
     bool isAuthenticated = true,
   }) async {
     try {
-      final response = await _dio.put(
+      final response = await _dio.head<String>(
         path,
         queryParameters: queryParameters,
-        data: body,
         options: _getOptions(isAuthenticated: isAuthenticated),
       );
 
       return _getResponse(response);
     } catch (e, s) {
       if (kDebugMode) {
-        print('Api put Error ==> $e');
-        print('Api put Stack ==> $s');
+        print('Api head Error ==> $e');
+        print('Api head Stack ==> $s');
       }
 
       final errorResponse = ErrorResponseBody.fromCatch(
         error: e,
         stackTrace: s,
         className: 'Api',
-        methodName: 'put',
+        methodName: 'head',
       );
 
       final errorJsonBody = errorResponse.toRawJson();
