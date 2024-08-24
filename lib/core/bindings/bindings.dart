@@ -1,7 +1,7 @@
 import 'package:get_it/get_it.dart';
 
 import '../../data/network/api_client.dart';
-import '../../data/network/http_client.dart';
+import '../../data/network/dio_client.dart';
 import '../../data/providers/movie_provider.dart';
 import '../../data/repositories/movie_repository.dart';
 import '../../data/stores/movie_store.dart';
@@ -12,7 +12,7 @@ class Bindings {
     final getIt = GetIt.instance;
 
     getIt.registerLazySingleton<ApiClient>(
-      () => HttpClient(),
+      () => DioClient(),
     );
 
     getIt.registerLazySingleton<MovieProvider>(

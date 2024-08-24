@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
@@ -24,12 +26,16 @@ class DioClient implements ApiClient {
 
   NetworkResponse _getResponse(Response response) {
     return NetworkResponse(
-      body: response.data,
+      body: jsonEncode(response.data),
       statusCode: response.statusCode ?? 500,
     );
   }
 
-  final _dio = Dio();
+  final _dio = Dio(
+    BaseOptions(
+      baseUrl: 'https://${Constants.baseUrl}/${Constants.apiVersion}/',
+    ),
+  );
 
   @override
   Future<NetworkResponse> get({

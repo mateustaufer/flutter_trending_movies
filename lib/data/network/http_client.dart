@@ -7,13 +7,6 @@ import 'api_client.dart';
 import 'network_response.dart';
 
 class HttpClient implements ApiClient {
-  NetworkResponse _getResponse(http.Response response) {
-    return NetworkResponse(
-      body: response.body,
-      statusCode: response.statusCode,
-    );
-  }
-
   Map<String, String> _getHeaders({required bool isAuthenticated}) {
     if (!isAuthenticated) {
       return {'Content-Type': 'application/json;charset=utf-8'};
@@ -23,6 +16,13 @@ class HttpClient implements ApiClient {
       'Content-Type': 'application/json;charset=utf-8',
       'Authorization': 'Bearer ${Constants.bearerToken}',
     };
+  }
+
+  NetworkResponse _getResponse(http.Response response) {
+    return NetworkResponse(
+      body: response.body,
+      statusCode: response.statusCode,
+    );
   }
 
   @override
