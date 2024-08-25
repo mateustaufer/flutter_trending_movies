@@ -1,8 +1,8 @@
 import 'package:dartz/dartz.dart';
 
-import '../models/error_response_body.dart';
-import '../models/movie_model.dart';
-import '../models/movies_list_model.dart';
+import '../../models/error_response_body.dart';
+import '../../models/movie_model.dart';
+import '../../models/movies_list_model.dart';
 
 abstract class MovieRepository {
   Future<Either<ErrorResponseBody, MoviesListModel>> fetchTrendingMoviesList({

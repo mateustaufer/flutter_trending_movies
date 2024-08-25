@@ -1,10 +1,10 @@
 import 'package:dartz/dartz.dart';
 import 'package:flutter/foundation.dart';
 
-import '../models/error_response_body.dart';
-import '../models/movie_model.dart';
-import '../models/movies_list_model.dart';
-import '../providers/movie_provider.dart';
+import '../../models/error_response_body.dart';
+import '../../models/movie_model.dart';
+import '../../models/movies_list_model.dart';
+import '../../providers/movie_provider.dart';
 import 'movie_repository.dart';
 
 class MovieRepositoryImp implements MovieRepository {

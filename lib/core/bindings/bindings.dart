@@ -1,31 +1,29 @@
 import 'package:get_it/get_it.dart';
 
+import '../../data/decorators/movie/movie_cache_repository_decorator.dart';
 import '../../data/network/api_client.dart';
 import '../../data/network/dio_client.dart';
 import '../../data/providers/movie_provider.dart';
-import '../../data/repositories/movie_repository_imp.dart';
+import '../../data/repositories/movie/movie_repository.dart';
+import '../../data/repositories/movie/movie_repository_imp.dart';
 import '../../data/stores/movie_store.dart';
 import '../../data/stores/trending_movies_store.dart';
+import '../storage/shared_preferences_storage.dart';
+import '../storage/storage.dart';
 
 class Bindings {
   static void init() {
     final getIt = GetIt.instance;
 
-    getIt.registerLazySingleton<ApiClient>(
-      () => DioClient(),
+    getIt.registerLazySingleton<ApiClient>(() => DioClient());
+    getIt.registerLazySingleton<Storage>(() => SharedPreferencesStorage());
+    getIt.registerLazySingleton<MovieProvider>(() => MovieProvider(getIt()));
+
+    getIt.registerLazySingleton<MovieRepository>(
+      () => MovieCacheRepositoryDecorator(MovieRepositoryImp(getIt())),
     );
 
-    getIt.registerLazySingleton<MovieProvider>(
-      () => MovieProvider(getIt()),
-    );
-
-    getIt.registerLazySingleton<MovieRepositoryImp>(
-      () => MovieRepositoryImp(getIt()),
-    );
-
-    getIt.registerLazySingleton<MovieStore>(
-      () => MovieStore(getIt()),
-    );
+    getIt.registerLazySingleton<MovieStore>(() => MovieStore(getIt()));
 
     getIt.registerLazySingleton<TrendingMoviesStore>(
       () => TrendingMoviesStore(getIt()),
