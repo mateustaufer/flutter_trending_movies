@@ -1,13 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_trending_movies/data/network/network_response.dart';
-import 'package:flutter_trending_movies/data/repositories/movie_repository.dart';
+import 'package:flutter_trending_movies/data/repositories/movie_repository_imp.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../mocks/movie_provider_mock.dart';
 
 void main() {
   final movieProviderMock = MovieProviderMock();
-  final movieRepository = MovieRepository(movieProviderMock);
+  final movieRepository = MovieRepositoryImp(movieProviderMock);
 
   test('Fetch trending movies list', () async {
     when(
