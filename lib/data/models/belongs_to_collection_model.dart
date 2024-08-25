@@ -4,8 +4,12 @@ class BelongsToCollectionModel {
   String? posterPath;
   String? backdropPath;
 
-  BelongsToCollectionModel(
-      {this.id, this.name, this.posterPath, this.backdropPath});
+  BelongsToCollectionModel({
+    this.id,
+    this.name,
+    this.posterPath,
+    this.backdropPath,
+  });
 
   BelongsToCollectionModel copyWith({
     int? id,
