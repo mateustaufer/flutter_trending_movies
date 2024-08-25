@@ -8,7 +8,7 @@ import '../../pages/trending_movies/trending_movies_page.dart';
 
 class Routes {
   static const home = '/';
-  static const splashScreen = '/splash-screen';
+  static const splashScreen = '/welcome';
   static const counter = '/counter';
   static const trendingMovies = '/trending-movies';
   static const movieDetails = '/trending-movies/movie-details';
