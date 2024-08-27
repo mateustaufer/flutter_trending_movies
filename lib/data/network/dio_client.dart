@@ -62,7 +62,7 @@ class DioClient implements ApiClient {
         methodName: 'get',
       );
 
-      final errorJsonBody = errorResponse.toRawJson();
+      final errorJsonBody = errorResponse.toEncodedJson();
 
       return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
@@ -97,7 +97,7 @@ class DioClient implements ApiClient {
         methodName: 'post',
       );
 
-      final errorJsonBody = errorResponse.toRawJson();
+      final errorJsonBody = errorResponse.toEncodedJson();
 
       return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
@@ -132,7 +132,7 @@ class DioClient implements ApiClient {
         methodName: 'put',
       );
 
-      final errorJsonBody = errorResponse.toRawJson();
+      final errorJsonBody = errorResponse.toEncodedJson();
 
       return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
@@ -165,7 +165,7 @@ class DioClient implements ApiClient {
         methodName: 'delete',
       );
 
-      final errorJsonBody = errorResponse.toRawJson();
+      final errorJsonBody = errorResponse.toEncodedJson();
 
       return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
@@ -200,7 +200,7 @@ class DioClient implements ApiClient {
         methodName: 'patch',
       );
 
-      final errorJsonBody = errorResponse.toRawJson();
+      final errorJsonBody = errorResponse.toEncodedJson();
 
       return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
@@ -233,7 +233,7 @@ class DioClient implements ApiClient {
         methodName: 'head',
       );
 
-      final errorJsonBody = errorResponse.toRawJson();
+      final errorJsonBody = errorResponse.toEncodedJson();
 
       return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
