@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:dartz/dartz.dart';
 import 'package:get_it/get_it.dart';
 
@@ -17,9 +15,22 @@ class MovieCacheRepositoryDecorator extends MovieRepositoryDecorator {
     required String timeWindow,
     String language = 'pt-BR',
   }) async {
-    return await super.fetchTrendingMoviesList(
+    return (await super.fetchTrendingMoviesList(
       timeWindow: timeWindow,
       language: language,
+    ))
+        .fold(
+      (l) async {
+        final trendingMoviesList = await getTrendingMoviesListFromCache();
+        if (trendingMoviesList != null) {
+          return Right(trendingMoviesList);
+        }
+        return Left(l);
+      },
+      (r) async {
+        saveTrendingMoviesListInCache(r);
+        return Right(r);
+      },
     );
   }
 
@@ -28,15 +39,26 @@ class MovieCacheRepositoryDecorator extends MovieRepositoryDecorator {
     required String movieId,
     String language = 'pt-BR',
   }) async {
-    return await super.fetchMovieDetails(movieId: movieId, language: language);
+    return (await super.fetchMovieDetails(movieId: movieId, language: language))
+        .fold(
+      (l) async {
+        final movieDetails = await getMovieDetailsFromCache();
+        if (movieDetails != null) {
+          return Right(movieDetails);
+        }
+        return Left(l);
+      },
+      (r) async {
+        saveMovieDetailsInCache(r);
+        return Right(r);
+      },
+    );
   }
 
   void saveTrendingMoviesListInCache(MoviesListModel trendingMoviesList) async {
+    final json = trendingMoviesList.toEncodedJson();
     final storage = GetIt.I.get<Storage>();
-    await storage.save(
-      'trendingMoviesList',
-      jsonEncode(trendingMoviesList.toJson()),
-    );
+    storage.save('trendingMoviesList', json);
   }
 
   Future<MoviesListModel?> getTrendingMoviesListFromCache() async {
@@ -44,15 +66,16 @@ class MovieCacheRepositoryDecorator extends MovieRepositoryDecorator {
 
     final trendingMoviesListJson = await storage.read('trendingMoviesList');
     if (trendingMoviesListJson != null) {
-      return MoviesListModel.fromJson(jsonDecode(trendingMoviesListJson));
+      return MoviesListModel.fromRawJson(trendingMoviesListJson);
     }
 
     return null;
   }
 
   void saveMovieDetailsInCache(MovieModel movie) {
+    final json = movie.toEncodedJson();
     final storage = GetIt.I.get<Storage>();
-    storage.save('movieDetails', jsonEncode(movie.toJson()));
+    storage.save('movieDetails', json);
   }
 
   Future<MovieModel?> getMovieDetailsFromCache() async {
@@ -60,7 +83,7 @@ class MovieCacheRepositoryDecorator extends MovieRepositoryDecorator {
 
     final movieDetailsJson = await storage.read('movieDetails');
     if (movieDetailsJson != null) {
-      return MovieModel.fromJson(jsonDecode(movieDetailsJson));
+      return MovieModel.fromRawJson(movieDetailsJson);
     }
 
     return null;

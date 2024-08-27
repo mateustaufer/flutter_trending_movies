@@ -55,7 +55,7 @@ class HttpClient implements ApiClient {
         methodName: 'get',
       );
 
-      final errorJsonBody = errorResponse.toRawJson();
+      final errorJsonBody = errorResponse.toEncodedJson();
 
       return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
@@ -93,7 +93,7 @@ class HttpClient implements ApiClient {
         methodName: 'post',
       );
 
-      final errorJsonBody = errorResponse.toRawJson();
+      final errorJsonBody = errorResponse.toEncodedJson();
 
       return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
@@ -131,7 +131,7 @@ class HttpClient implements ApiClient {
         methodName: 'put',
       );
 
-      final errorJsonBody = errorResponse.toRawJson();
+      final errorJsonBody = errorResponse.toEncodedJson();
 
       return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
@@ -167,7 +167,7 @@ class HttpClient implements ApiClient {
         methodName: 'delete',
       );
 
-      final errorJsonBody = errorResponse.toRawJson();
+      final errorJsonBody = errorResponse.toEncodedJson();
 
       return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
@@ -205,7 +205,7 @@ class HttpClient implements ApiClient {
         methodName: 'patch',
       );
 
-      final errorJsonBody = errorResponse.toRawJson();
+      final errorJsonBody = errorResponse.toEncodedJson();
 
       return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
@@ -241,7 +241,7 @@ class HttpClient implements ApiClient {
         methodName: 'patch',
       );
 
-      final errorJsonBody = errorResponse.toRawJson();
+      final errorJsonBody = errorResponse.toEncodedJson();
 
       return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }

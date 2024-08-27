@@ -202,7 +202,7 @@ class MovieModel {
     tagline = json['tagline'];
   }
 
-  String toRawJson() => json.encode(toJson());
+  String toEncodedJson() => json.encode(toJson());
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};
