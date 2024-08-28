@@ -218,7 +218,9 @@ class MovieModel {
     if (originalLanguage != null) data['original_language'] = originalLanguage;
     if (genreIds != null) data['genre_ids'] = genreIds;
     if (popularity != null) data['popularity'] = popularity;
-    if (releaseDate != null) data['release_date'] = releaseDate;
+    if (releaseDate != null) {
+      data['release_date'] = releaseDate?.toIso8601String();
+    }
     if (video != null) data['video'] = video;
     if (voteAverage != null) data['vote_average'] = voteAverage;
     if (voteCount != null) data['vote_count'] = voteCount;
