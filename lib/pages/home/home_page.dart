@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../core/routes/routes.dart';
-import '../widgets/base_page_widget.dart';
+import '../../core/routes/routes.dart';
+import '../../widgets/base_page_widget.dart';
 
-class HomePageView extends StatelessWidget {
-  const HomePageView({super.key});
+class HomePage extends StatelessWidget {
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {

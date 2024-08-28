@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../repositories/movie_repository.dart';
+import '../repositories/movie/movie_repository.dart';
 import '../states/movie_state.dart';
 
 class MovieStore extends ValueNotifier<MovieState> {

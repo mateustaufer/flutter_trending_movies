@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class CounterPageView extends StatefulWidget {
-  const CounterPageView({super.key});
+class CounterPage extends StatefulWidget {
+  const CounterPage({super.key});
 
   @override
-  State<CounterPageView> createState() => _MyHomePageState();
+  State<CounterPage> createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<CounterPageView> {
+class _MyHomePageState extends State<CounterPage> {
   final counter = ValueNotifier<int>(0);
 
   void incrementCounter() {

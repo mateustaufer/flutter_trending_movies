@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:shimmer/shimmer.dart';
 
-import '../data/states/movie_state.dart';
-import '../data/stores/movie_store.dart';
-import '../widgets/base_page_widget.dart';
+import '../../data/states/movie_state.dart';
+import '../../data/stores/movie_store.dart';
+import '../../widgets/base_page_widget.dart';
 
-class MoviePageView extends StatefulWidget {
-  const MoviePageView({super.key});
+class MoviePage extends StatefulWidget {
+  const MoviePage({super.key});
 
   @override
-  State<MoviePageView> createState() => _MoviePageViewState();
+  State<MoviePage> createState() => _MoviePageViewState();
 }
 
-class _MoviePageViewState extends State<MoviePageView> {
+class _MoviePageViewState extends State<MoviePage> {
   final movieStore = GetIt.I.get<MovieStore>();
 
   @override
