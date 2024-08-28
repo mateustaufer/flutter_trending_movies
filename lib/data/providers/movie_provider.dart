@@ -33,7 +33,7 @@ class MovieProvider {
         methodName: 'fetchTrendingMoviesList',
       );
 
-      final errorJsonBody = errorResponse.toRawJson();
+      final errorJsonBody = errorResponse.toEncodedJson();
 
       return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }
@@ -63,7 +63,7 @@ class MovieProvider {
         methodName: 'fetchMovieDetails',
       );
 
-      final errorJsonBody = errorResponse.toRawJson();
+      final errorJsonBody = errorResponse.toEncodedJson();
 
       return NetworkResponse(body: errorJsonBody, statusCode: 500);
     }

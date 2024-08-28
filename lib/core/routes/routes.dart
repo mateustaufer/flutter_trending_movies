@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
 
-import '../../views/counter_page_view.dart';
-import '../../views/home_page_view.dart';
-import '../../views/movie_page_view.dart';
-import '../../views/splash_screen.dart';
-import '../../views/trending_movies_page_view.dart';
+import '../../pages/counter/counter_page.dart';
+import '../../pages/home/home_page.dart';
+import '../../pages/movie/movie_page.dart';
+import '../../pages/splash/splash_page.dart';
+import '../../pages/trending_movies/trending_movies_page.dart';
 
 class Routes {
   static const home = '/';
-  static const splashScreen = '/splash-screen';
+  static const splashScreen = '/welcome';
   static const counter = '/counter';
   static const trendingMovies = '/trending-movies';
   static const movieDetails = '/trending-movies/movie-details';
 
   static Map<String, Widget Function(BuildContext)> routes = {
-    home: (_) => const HomePageView(),
-    splashScreen: (_) => const SplashScreen(),
-    counter: (_) => const CounterPageView(),
-    trendingMovies: (_) => const TrendingMoviesPageView(),
-    movieDetails: (_) => const MoviePageView(),
+    home: (_) => const HomePage(),
+    splashScreen: (_) => const SplashPage(),
+    counter: (_) => const CounterPage(),
+    trendingMovies: (_) => const TrendingMoviesPage(),
+    movieDetails: (_) => const MoviePage(),
   };
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {

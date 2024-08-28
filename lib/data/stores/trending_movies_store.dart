@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../repositories/movie_repository.dart';
+import '../repositories/movie/movie_repository.dart';
 import '../states/trending_movies_state.dart';
 
 class TrendingMoviesStore extends ValueNotifier<TrendingMoviesState> {

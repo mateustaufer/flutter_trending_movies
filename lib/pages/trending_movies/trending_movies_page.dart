@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 
-import '../data/states/trending_movies_state.dart';
-import '../data/stores/trending_movies_store.dart';
-import '../widgets/base_page_widget.dart';
+import '../../data/states/trending_movies_state.dart';
+import '../../data/stores/trending_movies_store.dart';
+import '../../widgets/base_page_widget.dart';
 import 'components/movies_list.dart';
 
-class TrendingMoviesPageView extends StatefulWidget {
-  const TrendingMoviesPageView({super.key});
+class TrendingMoviesPage extends StatefulWidget {
+  const TrendingMoviesPage({super.key});
 
   @override
-  State<TrendingMoviesPageView> createState() => _TrendingMoviesPageState();
+  State<TrendingMoviesPage> createState() => _TrendingMoviesPageState();
 }
 
-class _TrendingMoviesPageState extends State<TrendingMoviesPageView> {
+class _TrendingMoviesPageState extends State<TrendingMoviesPage> {
   final trendingMoviesStore = GetIt.I.get<TrendingMoviesStore>();
 
   @override
