@@ -1,29 +1,39 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:http/http.dart' as http;
 
-import '../../core/constants/constants.dart';
-import '../models/error_response_body.dart';
+import '../../data/models/error_response_body.dart';
+import '../constants/constants.dart';
 import 'api_client.dart';
 import 'network_response.dart';
 
-class HttpClient implements ApiClient {
-  Map<String, String> _getHeaders({required bool isAuthenticated}) {
-    if (!isAuthenticated) {
-      return {'Content-Type': 'application/json;charset=utf-8'};
+class DioClient implements ApiClient {
+  Options _getOptions({required bool isAuthenticated}) {
+    Map<String, dynamic> headers = {
+      'Content-Type': 'application/json;charset=utf-8',
+    };
+
+    if (isAuthenticated) {
+      headers = {
+        'Content-Type': 'application/json;charset=utf-8',
+        'Authorization': 'Bearer ${Constants.bearerToken}',
+      };
     }
 
-    return {
-      'Content-Type': 'application/json;charset=utf-8',
-      'Authorization': 'Bearer ${Constants.bearerToken}',
-    };
+    return Options(headers: headers);
   }
 
-  NetworkResponse _getResponse(http.Response response) {
+  NetworkResponse _getResponse(Response response) {
     return NetworkResponse(
-      body: response.body,
-      statusCode: response.statusCode,
+      body: response.data,
+      statusCode: response.statusCode ?? 500,
     );
   }
+
+  final _dio = Dio(
+    BaseOptions(
+      baseUrl: 'https://${Constants.baseUrl}/${Constants.apiVersion}/',
+    ),
+  );
 
   @override
   Future<NetworkResponse> get({
@@ -32,13 +42,10 @@ class HttpClient implements ApiClient {
     bool isAuthenticated = true,
   }) async {
     try {
-      final response = await http.get(
-        Uri.https(
-          Constants.baseUrl,
-          '${Constants.apiVersion}/$path',
-          queryParameters,
-        ),
-        headers: _getHeaders(isAuthenticated: isAuthenticated),
+      final response = await _dio.get<String>(
+        path,
+        queryParameters: queryParameters,
+        options: _getOptions(isAuthenticated: isAuthenticated),
       );
 
       return _getResponse(response);
@@ -69,14 +76,11 @@ class HttpClient implements ApiClient {
     bool isAuthenticated = true,
   }) async {
     try {
-      final response = await http.post(
-        Uri.https(
-          Constants.baseUrl,
-          '${Constants.apiVersion}/$path',
-          queryParameters,
-        ),
-        body: body,
-        headers: _getHeaders(isAuthenticated: isAuthenticated),
+      final response = await _dio.post<String>(
+        path,
+        queryParameters: queryParameters,
+        data: body,
+        options: _getOptions(isAuthenticated: isAuthenticated),
       );
 
       return _getResponse(response);
@@ -107,14 +111,11 @@ class HttpClient implements ApiClient {
     bool isAuthenticated = true,
   }) async {
     try {
-      final response = await http.put(
-        Uri.https(
-          Constants.baseUrl,
-          '${Constants.apiVersion}/$path',
-          queryParameters,
-        ),
-        body: body,
-        headers: _getHeaders(isAuthenticated: isAuthenticated),
+      final response = await _dio.put<String>(
+        path,
+        queryParameters: queryParameters,
+        data: body,
+        options: _getOptions(isAuthenticated: isAuthenticated),
       );
 
       return _getResponse(response);
@@ -144,13 +145,10 @@ class HttpClient implements ApiClient {
     bool isAuthenticated = true,
   }) async {
     try {
-      final response = await http.delete(
-        Uri.https(
-          Constants.baseUrl,
-          '${Constants.apiVersion}/$path',
-          queryParameters,
-        ),
-        headers: _getHeaders(isAuthenticated: isAuthenticated),
+      final response = await _dio.delete<String>(
+        path,
+        queryParameters: queryParameters,
+        options: _getOptions(isAuthenticated: isAuthenticated),
       );
 
       return _getResponse(response);
@@ -181,14 +179,11 @@ class HttpClient implements ApiClient {
     bool isAuthenticated = true,
   }) async {
     try {
-      final response = await http.patch(
-        Uri.https(
-          Constants.baseUrl,
-          '${Constants.apiVersion}/$path',
-          queryParameters,
-        ),
-        body: body,
-        headers: _getHeaders(isAuthenticated: isAuthenticated),
+      final response = await _dio.patch<String>(
+        path,
+        queryParameters: queryParameters,
+        data: body,
+        options: _getOptions(isAuthenticated: isAuthenticated),
       );
 
       return _getResponse(response);
@@ -218,13 +213,10 @@ class HttpClient implements ApiClient {
     bool isAuthenticated = true,
   }) async {
     try {
-      final response = await http.head(
-        Uri.https(
-          Constants.baseUrl,
-          '${Constants.apiVersion}/$path',
-          queryParameters,
-        ),
-        headers: _getHeaders(isAuthenticated: isAuthenticated),
+      final response = await _dio.head<String>(
+        path,
+        queryParameters: queryParameters,
+        options: _getOptions(isAuthenticated: isAuthenticated),
       );
 
       return _getResponse(response);
@@ -238,7 +230,7 @@ class HttpClient implements ApiClient {
         error: e,
         stackTrace: s,
         className: 'Api',
-        methodName: 'patch',
+        methodName: 'head',
       );
 
       final errorJsonBody = errorResponse.toEncodedJson();

@@ -1,8 +1,8 @@
 import 'package:flutter/foundation.dart';
 
+import '../../core/network/api_client.dart';
+import '../../core/network/network_response.dart';
 import '../models/error_response_body.dart';
-import '../network/api_client.dart';
-import '../network/network_response.dart';
 
 class MovieProvider {
   final ApiClient apiClient;

@@ -1,4 +1,4 @@
-import 'package:flutter_trending_movies/data/providers/movie_provider.dart';
+import 'package:flutter_trending_movies/app/data/providers/movie_provider.dart';
 import 'package:mocktail/mocktail.dart';
 
 class MovieProviderMock extends Mock implements MovieProvider {

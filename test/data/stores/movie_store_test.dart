@@ -1,9 +1,9 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:flutter_trending_movies/data/models/error_response_body.dart';
-import 'package:flutter_trending_movies/data/network/network_response.dart';
-import 'package:flutter_trending_movies/data/repositories/movie/movie_repository_imp.dart';
-import 'package:flutter_trending_movies/data/states/movie_state.dart';
-import 'package:flutter_trending_movies/data/stores/movie_store.dart';
+import 'package:flutter_trending_movies/app/core/network/network_response.dart';
+import 'package:flutter_trending_movies/app/data/models/error_response_body.dart';
+import 'package:flutter_trending_movies/app/data/repositories/movie/movie_repository_imp.dart';
+import 'package:flutter_trending_movies/app/data/states/movie_state.dart';
+import 'package:flutter_trending_movies/app/data/stores/movie_store.dart';
 import 'package:mocktail/mocktail.dart';
 
 import '../mocks/movie_provider_mock.dart';

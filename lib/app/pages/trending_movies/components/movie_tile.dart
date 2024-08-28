@@ -4,7 +4,7 @@ import 'package:intl/intl.dart';
 import '../../../core/routes/routes.dart';
 import '../../../data/models/movie_model.dart';
 import '../../../widgets/network_image_widget.dart';
-import '../../movie/components/info_row.dart';
+import 'info_row.dart';
 
 class MovieTile extends StatelessWidget {
   final MovieModel movie;

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
-import 'app.dart';
-import 'core/bindings/bindings.dart';
-import 'utils/configure_nonweb.dart'
-    if (dart.library.html) 'utils/configure_web.dart';
+import 'app/app.dart';
+import 'app/core/bindings/bindings.dart';
+import 'app/utils/configure_nonweb.dart'
+    if (dart.library.html) 'app/utils/configure_web.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
