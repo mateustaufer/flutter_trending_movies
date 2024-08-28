@@ -8,15 +8,15 @@ import '../../data/stores/movie_store.dart';
 import '../../data/stores/trending_movies_store.dart';
 import '../network/api_client.dart';
 import '../network/dio_client.dart';
-import '../storage/shared_preferences_storage.dart';
-import '../storage/storage.dart';
+import '../storage/local/local_storage.dart';
+import '../storage/local/shared_preferences_imp.dart';
 
 class Bindings {
   static void init() {
     final getIt = GetIt.instance;
 
     getIt.registerLazySingleton<ApiClient>(() => DioClient());
-    getIt.registerLazySingleton<Storage>(() => SharedPreferencesImp());
+    getIt.registerLazySingleton<LocalStorage>(() => SharedPreferencesImp());
     getIt.registerLazySingleton<MovieProvider>(() => MovieProvider(getIt()));
 
     getIt.registerLazySingleton<MovieRepository>(

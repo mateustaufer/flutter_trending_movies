@@ -1,7 +1,7 @@
 import 'package:dartz/dartz.dart';
 import 'package:get_it/get_it.dart';
 
-import '../../../core/storage/storage.dart';
+import '../../../core/storage/local/local_storage.dart';
 import '../../models/error_response_body.dart';
 import '../../models/movie_model.dart';
 import '../../models/movies_list_model.dart';
@@ -57,12 +57,12 @@ class MovieCacheRepositoryDecorator extends MovieRepositoryDecorator {
 
   void saveTrendingMoviesListInCache(MoviesListModel trendingMoviesList) async {
     final json = trendingMoviesList.toEncodedJson();
-    final storage = GetIt.I.get<Storage>();
+    final storage = GetIt.I.get<LocalStorage>();
     storage.save('trendingMoviesList', json);
   }
 
   Future<MoviesListModel?> getTrendingMoviesListFromCache() async {
-    final storage = GetIt.I.get<Storage>();
+    final storage = GetIt.I.get<LocalStorage>();
 
     final trendingMoviesListJson = await storage.read('trendingMoviesList');
     if (trendingMoviesListJson != null) {
@@ -74,12 +74,12 @@ class MovieCacheRepositoryDecorator extends MovieRepositoryDecorator {
 
   void saveMovieDetailsInCache(MovieModel movie) {
     final json = movie.toEncodedJson();
-    final storage = GetIt.I.get<Storage>();
+    final storage = GetIt.I.get<LocalStorage>();
     storage.save('movieDetails', json);
   }
 
   Future<MovieModel?> getMovieDetailsFromCache() async {
-    final storage = GetIt.I.get<Storage>();
+    final storage = GetIt.I.get<LocalStorage>();
 
     final movieDetailsJson = await storage.read('movieDetails');
     if (movieDetailsJson != null) {

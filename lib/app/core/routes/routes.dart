@@ -8,7 +8,7 @@ import '../../pages/movie/movie_page.dart';
 import '../../pages/not_found/not_found_page.dart';
 import '../../pages/splash/splash_page.dart';
 import '../../pages/trending_movies/trending_movies_page.dart';
-import '../storage/storage.dart';
+import '../storage/local/local_storage.dart';
 
 class Routes {
   static const home = '/';
@@ -30,7 +30,7 @@ class Routes {
   };
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    final storage = GetIt.I.get<Storage>();
+    final storage = GetIt.I.get<LocalStorage>();
 
     if (settings.name != login && settings.name != splashScreen) {
       String? authToken;

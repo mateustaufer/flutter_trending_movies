@@ -1,8 +1,8 @@
 import 'package:get_storage/get_storage.dart';
 
-import 'storage.dart';
+import 'local_storage.dart';
 
-class GetStorageImp implements Storage {
+class GetStorageImp implements LocalStorage {
   static const String storageContainer = 'app_data';
 
   @override
