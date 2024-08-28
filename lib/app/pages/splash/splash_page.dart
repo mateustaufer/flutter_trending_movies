@@ -30,9 +30,11 @@ class _SplashPageState extends State<SplashPage> {
   @override
   Widget build(BuildContext context) {
     return BasePageWidget(
-      body: Expanded(
-        child: Center(
-          child: Lottie.asset('assets/lotties/movie_splash.json'),
+      body: Center(
+        child: Lottie.asset(
+          'assets/lotties/movie_splash.json',
+          alignment: Alignment.center,
+          fit: BoxFit.contain,
         ),
       ),
     );
