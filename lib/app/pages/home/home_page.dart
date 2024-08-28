@@ -23,6 +23,11 @@ class HomePage extends StatelessWidget {
                 context,
                 Routes.trendingMovies,
               ),
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(
+                  const Color(0xFF017CFF),
+                ),
+              ),
             ),
             const SizedBox(height: 8),
             FilledButton.icon(
@@ -31,6 +36,11 @@ class HomePage extends StatelessWidget {
               onPressed: () => Navigator.pushNamed(
                 context,
                 Routes.counter,
+              ),
+              style: ButtonStyle(
+                backgroundColor: WidgetStateProperty.all(
+                  const Color(0xFF017CFF),
+                ),
               ),
             ),
           ],
