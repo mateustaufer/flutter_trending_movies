@@ -7,8 +7,10 @@ A simple Flutter Web App that shows a trending movies list from TMDB API.
 - Flutter SDK: 3.24.1
 - Dart SDK: 3.5.1
 
-## Features
+## Pages
 
+- Splash Screen
+- Home
 - Trending movies list
 - Movie details
 - Flutter counter (just to demonstrate widget test)
