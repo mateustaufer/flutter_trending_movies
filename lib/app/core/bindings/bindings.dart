@@ -16,7 +16,7 @@ class Bindings {
     final getIt = GetIt.instance;
 
     getIt.registerLazySingleton<ApiClient>(() => DioClient());
-    getIt.registerLazySingleton<Storage>(() => SharedPreferencesStorage());
+    getIt.registerLazySingleton<Storage>(() => SharedPreferencesImp());
     getIt.registerLazySingleton<MovieProvider>(() => MovieProvider(getIt()));
 
     getIt.registerLazySingleton<MovieRepository>(

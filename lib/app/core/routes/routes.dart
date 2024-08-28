@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../pages/counter/counter_page.dart';
 import '../../pages/home/home_page.dart';
@@ -7,6 +8,7 @@ import '../../pages/movie/movie_page.dart';
 import '../../pages/not_found/not_found_page.dart';
 import '../../pages/splash/splash_page.dart';
 import '../../pages/trending_movies/trending_movies_page.dart';
+import '../storage/storage.dart';
 
 class Routes {
   static const home = '/';
@@ -28,6 +30,22 @@ class Routes {
   };
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+    final storage = GetIt.I.get<Storage>();
+
+    if (settings.name != login && settings.name != splashScreen) {
+      String? authToken;
+      storage.read('authToken').then((value) {
+        authToken = value;
+      });
+
+      if (authToken == null) {
+        return PageRouteBuilder(
+          pageBuilder: (context, _, __) => routes[login]!(context),
+          settings: const RouteSettings(name: login),
+        );
+      }
+    }
+
     final uri = Uri.parse(settings.name!);
 
     final parameters = <String, String>{};
@@ -40,9 +58,7 @@ class Routes {
     String name = settings.name ?? '';
     if (!name.contains('?')) {
       String parameterString = parameters.entries.isNotEmpty ? '?' : '';
-      parameters.forEach((key, value) {
-        parameterString += '$key=$value&';
-      });
+      parameters.forEach((key, value) => parameterString += '$key=$value&');
 
       name = '${settings.name}$parameterString';
     }

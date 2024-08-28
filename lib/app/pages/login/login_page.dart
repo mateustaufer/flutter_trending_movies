@@ -8,12 +8,8 @@ class LoginPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasePageWidget(
-      appBar: AppBar(
-        title: const Text('Login Page'),
-      ),
-      body: const Center(
-        child: Text('Login Page'),
-      ),
+      appBar: AppBar(title: const Text('Login Page')),
+      body: const Center(child: Text('Login Page')),
     );
   }
 }

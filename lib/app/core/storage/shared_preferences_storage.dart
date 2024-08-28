@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'storage.dart';
 
-class SharedPreferencesStorage implements Storage {
+class SharedPreferencesImp implements Storage {
   @override
   Future<void> init() => Future.value();
 
