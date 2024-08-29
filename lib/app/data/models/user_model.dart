@@ -59,7 +59,7 @@ class UserModel {
     username = json['username'];
     iso6391 = json['iso_639_1'];
     iso31661 = json['iso_3166_1'];
-    includeAdult = json['include_adult'];
+    includeAdult = json['include_adult'] ?? true;
     avatar =
         json['avatar'] != null ? AvatarModel.fromJson(json['avatar']) : null;
   }
@@ -76,7 +76,7 @@ class UserModel {
     if (username != null) data['username'] = username;
     if (iso6391 != null) data['iso_639_1'] = iso6391;
     if (iso31661 != null) data['iso_3166_1'] = iso31661;
-    if (includeAdult != null) data['include_adult'] = includeAdult;
+    data['include_adult'] = includeAdult ?? true;
     if (avatar != null) data['avatar'] = avatar?.toJson();
 
     return data;
