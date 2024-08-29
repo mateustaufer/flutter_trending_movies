@@ -9,7 +9,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasePageWidget(
-      backgroundColor: Colors.grey.shade100,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -23,25 +22,12 @@ class HomePage extends StatelessWidget {
                 context,
                 Routes.trendingMovies,
               ),
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all(
-                  const Color(0xFF017CFF),
-                ),
-              ),
             ),
             const SizedBox(height: 8),
             FilledButton.icon(
               label: const Text('Flutter Counter'),
               icon: const Icon(Icons.add),
-              onPressed: () => Navigator.pushNamed(
-                context,
-                Routes.counter,
-              ),
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all(
-                  const Color(0xFF017CFF),
-                ),
-              ),
+              onPressed: () => Navigator.pushNamed(context, Routes.counter),
             ),
           ],
         ),

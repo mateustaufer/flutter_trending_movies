@@ -26,9 +26,8 @@ class _TrendingMoviesPageState extends State<TrendingMoviesPage> {
   @override
   Widget build(BuildContext context) {
     return BasePageWidget(
-      backgroundColor: Colors.grey.shade100,
       appBar: AppBar(
-        backgroundColor: Colors.grey.shade200,
+        backgroundColor: Theme.of(context).colorScheme.primary,
         elevation: 4,
         shadowColor: Colors.grey.shade400,
         title: const Text(

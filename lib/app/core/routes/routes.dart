@@ -30,20 +30,20 @@ class Routes {
   };
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    final storage = GetIt.I.get<LocalStorage>();
-
     if (settings.name != login && settings.name != splashScreen) {
+      final storage = GetIt.I.get<LocalStorage>();
       String? authToken;
+
       storage.read('authToken').then((value) {
         authToken = value;
-      });
 
-      if (authToken == null) {
-        return PageRouteBuilder(
-          pageBuilder: (context, _, __) => routes[login]!(context),
-          settings: const RouteSettings(name: login),
-        );
-      }
+        if (authToken == null) {
+          return PageRouteBuilder(
+            pageBuilder: (context, _, __) => routes[login]!(context),
+            settings: const RouteSettings(name: login),
+          );
+        }
+      });
     }
 
     final uri = Uri.parse(settings.name!);
@@ -59,7 +59,6 @@ class Routes {
     if (!name.contains('?')) {
       String parameterString = parameters.entries.isNotEmpty ? '?' : '';
       parameters.forEach((key, value) => parameterString += '$key=$value&');
-
       name = '${settings.name}$parameterString';
     }
 

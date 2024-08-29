@@ -27,11 +27,6 @@ class NotFoundPage extends StatelessWidget {
                 Routes.home,
                 (route) => false,
               ),
-              style: ButtonStyle(
-                backgroundColor: WidgetStateProperty.all(
-                  const Color(0xFF017CFF),
-                ),
-              ),
               child: const Text('Voltar'),
             ),
           ],

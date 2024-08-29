@@ -11,7 +11,13 @@ class App extends StatelessWidget {
       title: 'Trending Movies',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF017CFF)),
+        filledButtonTheme: const FilledButtonThemeData(
+          style: ButtonStyle(
+            backgroundColor: WidgetStatePropertyAll(Color(0xFF017CFF)),
+            fixedSize: WidgetStatePropertyAll(Size(240, 48)),
+          ),
+        ),
         useMaterial3: true,
       ),
       onGenerateRoute: Routes.onGenerateRoute,
