@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'core/routes/routes.dart';
+import 'styles/app_themes.dart';
 
 class App extends StatelessWidget {
   const App({super.key});
@@ -10,16 +11,7 @@ class App extends StatelessWidget {
     return MaterialApp(
       title: 'Trending Movies',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF017CFF)),
-        filledButtonTheme: const FilledButtonThemeData(
-          style: ButtonStyle(
-            backgroundColor: WidgetStatePropertyAll(Color(0xFF017CFF)),
-            fixedSize: WidgetStatePropertyAll(Size(240, 48)),
-          ),
-        ),
-        useMaterial3: true,
-      ),
+      theme: AppThemes.appTheme,
       onGenerateRoute: Routes.onGenerateRoute,
       initialRoute: Routes.splashScreen,
     );
