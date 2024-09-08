@@ -9,7 +9,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BasePageWidget(
-      backgroundColor: Colors.grey.shade100,
       body: Center(
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -28,10 +27,7 @@ class HomePage extends StatelessWidget {
             FilledButton.icon(
               label: const Text('Flutter Counter'),
               icon: const Icon(Icons.add),
-              onPressed: () => Navigator.pushNamed(
-                context,
-                Routes.counter,
-              ),
+              onPressed: () => Navigator.pushNamed(context, Routes.counter),
             ),
           ],
         ),

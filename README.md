@@ -10,9 +10,11 @@ A simple Flutter Web App that shows a trending movies list from TMDB API.
 ## Pages
 
 - Splash Screen
+- Login (just for teaching purposes)
 - Home
 - Trending movies list
-- Movie details
+- Movie details (It's not ready yet)
+- Not Found (404)
 - Flutter counter (just to demonstrate widget test)
 
 ## Getting Started

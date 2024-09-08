@@ -1,11 +1,17 @@
 import 'dart:convert';
 
+import 'avatar_model.dart';
+
 class UserModel {
   String? avatarPath;
   String? gravatarHash;
   String? id;
   String? name;
   String? username;
+  String? iso6391;
+  String? iso31661;
+  bool? includeAdult;
+  AvatarModel? avatar;
 
   UserModel({
     this.avatarPath,
@@ -13,6 +19,10 @@ class UserModel {
     this.id,
     this.name,
     this.username,
+    this.iso6391,
+    this.iso31661,
+    this.includeAdult,
+    this.avatar,
   });
 
   UserModel copyWith({
@@ -21,6 +31,10 @@ class UserModel {
     String? id,
     String? name,
     String? username,
+    String? iso6391,
+    String? iso31661,
+    bool? includeAdult,
+    AvatarModel? avatar,
   }) =>
       UserModel(
         avatarPath: avatarPath ?? this.avatarPath,
@@ -28,6 +42,10 @@ class UserModel {
         id: id ?? this.id,
         name: name ?? this.name,
         username: username ?? this.username,
+        iso6391: iso6391 ?? this.iso6391,
+        iso31661: iso31661 ?? this.iso31661,
+        includeAdult: includeAdult ?? this.includeAdult,
+        avatar: avatar ?? this.avatar,
       );
 
   factory UserModel.fromRawJson(String str) =>
@@ -39,6 +57,11 @@ class UserModel {
     id = json['id'];
     name = json['name'];
     username = json['username'];
+    iso6391 = json['iso_639_1'];
+    iso31661 = json['iso_3166_1'];
+    includeAdult = json['include_adult'] ?? true;
+    avatar =
+        json['avatar'] != null ? AvatarModel.fromJson(json['avatar']) : null;
   }
 
   String toEncodedJson() => json.encode(toJson());
@@ -51,6 +74,10 @@ class UserModel {
     if (id != null) data['id'] = id;
     if (name != null) data['name'] = name;
     if (username != null) data['username'] = username;
+    if (iso6391 != null) data['iso_639_1'] = iso6391;
+    if (iso31661 != null) data['iso_3166_1'] = iso31661;
+    data['include_adult'] = includeAdult ?? true;
+    if (avatar != null) data['avatar'] = avatar?.toJson();
 
     return data;
   }

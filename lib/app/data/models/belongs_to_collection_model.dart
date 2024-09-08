@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class BelongsToCollectionModel {
   int? id;
   String? name;
@@ -24,12 +26,17 @@ class BelongsToCollectionModel {
         backdropPath: backdropPath ?? this.backdropPath,
       );
 
+  factory BelongsToCollectionModel.fromRawJson(String str) =>
+      BelongsToCollectionModel.fromJson(json.decode(str));
+
   BelongsToCollectionModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
     name = json['name'];
     posterPath = json['poster_path'];
     backdropPath = json['backdrop_path'];
   }
+
+  String toEncodedJson() => json.encode(toJson());
 
   Map<String, dynamic> toJson() {
     final data = <String, dynamic>{};

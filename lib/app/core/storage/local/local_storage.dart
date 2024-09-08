@@ -1,4 +1,4 @@
-abstract class Storage {
+abstract class LocalStorage {
   Future<void> init();
   Future<void> save(String key, String value);
   Future<String?> read(String key);

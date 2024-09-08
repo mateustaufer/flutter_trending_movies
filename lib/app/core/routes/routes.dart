@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
 
 import '../../pages/counter/counter_page.dart';
 import '../../pages/home/home_page.dart';
+import '../../pages/login/login_page.dart';
 import '../../pages/movie/movie_page.dart';
+import '../../pages/not_found/not_found_page.dart';
 import '../../pages/splash/splash_page.dart';
 import '../../pages/trending_movies/trending_movies_page.dart';
+import '../storage/local/local_storage.dart';
 
 class Routes {
   static const home = '/';
@@ -12,6 +16,8 @@ class Routes {
   static const counter = '/counter';
   static const trendingMovies = '/trending-movies';
   static const movieDetails = '/trending-movies/movie-details';
+  static const login = '/sing-in';
+  static const notFound = '/not-found';
 
   static Map<String, Widget Function(BuildContext)> routes = {
     home: (_) => const HomePage(),
@@ -19,9 +25,27 @@ class Routes {
     counter: (_) => const CounterPage(),
     trendingMovies: (_) => const TrendingMoviesPage(),
     movieDetails: (_) => const MoviePage(),
+    login: (_) => const LoginPage(),
+    notFound: (_) => const NotFoundPage(),
   };
 
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
+    if (settings.name != login && settings.name != splashScreen) {
+      final storage = GetIt.I.get<LocalStorage>();
+      String? authToken;
+
+      storage.read('authToken').then((value) {
+        authToken = value;
+
+        if (authToken == null) {
+          return PageRouteBuilder(
+            pageBuilder: (context, _, __) => routes[login]!(context),
+            settings: const RouteSettings(name: login),
+          );
+        }
+      });
+    }
+
     final uri = Uri.parse(settings.name!);
 
     final parameters = <String, String>{};
@@ -34,10 +58,7 @@ class Routes {
     String name = settings.name ?? '';
     if (!name.contains('?')) {
       String parameterString = parameters.entries.isNotEmpty ? '?' : '';
-      parameters.forEach((key, value) {
-        parameterString += '$key=$value&';
-      });
-
+      parameters.forEach((key, value) => parameterString += '$key=$value&');
       name = '${settings.name}$parameterString';
     }
 
@@ -49,7 +70,7 @@ class Routes {
     }
 
     return PageRouteBuilder(
-      pageBuilder: (context, _, __) => routes[home]!(context),
+      pageBuilder: (context, _, __) => routes[notFound]!(context),
       settings: RouteSettings(arguments: parameters, name: name),
       transitionDuration: Duration.zero,
       reverseTransitionDuration: Duration.zero,

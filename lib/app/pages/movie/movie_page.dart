@@ -34,6 +34,7 @@ class _MoviePageViewState extends State<MoviePage> {
   Widget build(BuildContext context) {
     return BasePageWidget(
       appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.primary,
         title: ValueListenableBuilder(
           valueListenable: movieStore,
           builder: (context, state, child) {
@@ -53,7 +54,10 @@ class _MoviePageViewState extends State<MoviePage> {
               return Text((state.movie.title ?? ''));
             }
 
-            return const Text('Erro ao carregar o título do filme');
+            return const Text(
+              'Erro ao carregar o título do filme',
+              style: TextStyle(color: Colors.white),
+            );
           },
         ),
       ),
@@ -73,10 +77,20 @@ class _MoviePageViewState extends State<MoviePage> {
           }
 
           if (state is MovieSuccessState) {
-            return Center(child: Text('Id do filme: ${state.movie.id}'));
+            return Center(
+              child: Text(
+                'Id do filme: ${state.movie.id}',
+                style: const TextStyle(color: Colors.white),
+              ),
+            );
           }
 
-          return const Center(child: Text('A lista de filmes está vazia!'));
+          return const Center(
+            child: Text(
+              'A lista de filmes está vazia!',
+              style: TextStyle(color: Colors.white),
+            ),
+          );
         },
       ),
     );
